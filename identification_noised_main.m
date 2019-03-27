@@ -6,14 +6,15 @@ if noiseName == "salt & pepper"
     for index = 0:noised_sample
         NImg = imageNoiseMaker(fileName,noiseName,0.001*index);
         %--------------------------------------------
-        imshow(NImg);
-        title(['image with pepper & salt noise', num2str(0.001*index)]);
+        %                  imshow(NImg);
+        %         title(['image with pepper & salt noise', num2str(0.001*index)]);
         %--------------------------------------------
-     
-%         denoise_image = denoiseHandle(NImg, noiseName);
-%         fprintf("checking the noised image with noise %3f \n", 0.001*index);
-%         [maxmatchingRate, matchedTreeindex] = identification_noised(denoise_image);
-%         data(index + 1,1) = maxmatchingRate;
+        
+        denoise_image = denoiseHandle(NImg, noiseName);
+        imshow(denoise_image)
+        %         fprintf("checking the noised image with noise %3f \n", 0.001*index);
+        %         [maxmatchingRate, matchedTreeindex] = identification_noised(denoise_image);
+        %         data(index + 1,1) = maxmatchingRate;
         
     end
     
@@ -48,14 +49,14 @@ elseif noiseName == "motion"
     for index = 2:noised_sample
         [NImg, LEN, THETA] = imageNoiseMaker(fileName, noiseName, index, 20);
         %--------------------------------------------
-        imshow(NImg);
-        title(['image with motion noise with ', num2str(0.001*index), 'pixels shifting and 20 degree rotation']);
+        %         imshow(NImg);
+        %         title(['image with motion noise with ', num2str(0.001*index), 'pixels shifting and 20 degree rotation']);
         %--------------------------------------------
         
-%         denoise_image = denoiseHandle(NImg, noiseName, LEN, THETA);
-%         fprintf("checking the noised image with noise %d pixels shift and 20 degree \n",index);
-%         [maxmatchingRate, matchedTreeindex] = identification_noised(denoise_image);
-%         data(index - 1,1) = maxmatchingRate;
+        denoise_image = denoiseHandle(NImg, noiseName, LEN, THETA);
+        %         fprintf("checking the noised image with noise %d pixels shift and 20 degree \n",index);
+        %         [maxmatchingRate, matchedTreeindex] = identification_noised(denoise_image);
+        %         data(index - 1,1) = maxmatchingRate;
         
     end
     

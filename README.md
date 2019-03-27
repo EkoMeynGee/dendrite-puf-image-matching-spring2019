@@ -261,12 +261,13 @@ imwrite(I, 'name.tif')
 ### Problems
 
 - How to make two actually similar picture, one is the denoised image, which lost some node details; other one is the reference image. but they are looks really similar from a person visual point.
-
 - Add some scratches. Any method can denoise the scratches? does that change too much structure of tree.
-
 - how is similarity of scratch noise
+- ~~see if I can denoise the salt and pepper noise in a hard way, ==Not work==~~
+- Root finding accuracy checker, and how to solve it 
+- hough_circle function works better when the radius_descent set to **0.5**  
 
-  
+
 
 
 

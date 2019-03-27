@@ -1,0 +1,23 @@
+function algfixTesting(testIMG, refIMG)
+%%A function, trying to fix the porblem of matching not really good, with 2
+%%image matrix. Load 2 data.mat before run this function.
+
+figure, imshow(testIMG);
+figure, imshow(refIMG);
+
+% extractionIMG = zeros(800, 800);
+% testIMG_struct = bwconncomp(testIMG);
+% data = regionprops(testIMG_struct,'basic');
+% dataArea = [data.Area];
+% [~,idx] = max(dataArea);
+% extractionIMG(testIMG_struct.PixelIdxList{idx}) = true;
+% 
+% refIMG = extractionIMG;
+% figure, imshow(extractionIMG);
+
+
+[y, x] = find(testIMG == 1);
+portion_y = y( (~((y == 1) | (y == size(testIMG,1)))) & (~((x == 1) | (x == size(testIMG,2)))) );
+portion_x = x( (~((y == 1) | (y == size(testIMG,1)))) & (~((x == 1) | (x == size(testIMG,2)))) );
+
+for index 1:length([)
