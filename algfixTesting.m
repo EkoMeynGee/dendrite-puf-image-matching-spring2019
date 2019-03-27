@@ -37,7 +37,23 @@ figure, imshow(refIMG);
 % end
 % figure, imshow(testIMG)
 
-para_ref = round(mean(hough_circle(refIMG, .1, .1, 33, 37, 1),2));
-para_test = round(mean(hough_circle(testIMG, .2, .1, 33, 37, 1),2));
-[TreeStruct, new_result, cellnodes] = graph_based_rdGen(refIMG, circleInfo)
+para_ref = round(mean(hough_circle(refIMG, .5, .1, 33, 37, 1),2));
+para_test = round(mean(hough_circle(testIMG, .5, .1, 33, 37, 1),2));
+
+circleRef.x = para_ref(1);
+circleRef.y = para_ref(2);
+circleRef.radius = para_ref(3);
+
+circleTest.x = para_test(1);
+circleTest.y = para_test(2);
+circleTest.radius = para_test(3);
+
+[tree_ref, mat_ref, cell_ref] = graph_based_rdGen(refIMG, circleRef);
+figure, imshow(refIMG);
+viscircles([[cell_ref{:,8}]',[cell_ref{:,9}]'],ones(size(cell_ref,1),1)*.5)
+[tree_test, mat_test, cell_test] = graph_based_rdGen(testIMG, circleTest);
+figure, imshow(testIMG);
+viscircles([[cell_test{:,8}]', [cell_test{:,9}]'],ones(size(cell_test,1),1)*.5)
+
+
 
