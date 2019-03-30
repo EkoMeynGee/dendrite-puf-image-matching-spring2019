@@ -64,13 +64,13 @@ for index = 1:numDots
     end
 end
 
-if (iterTimes == 0)
+if (iterTimes == 1)
     TrueDotsSet = dotsSet;
 else
     TrueDotsSet = union(exdotsSet,dotsSet,'rows','stable');
 end
 
-if (iterTimes == 1)
+if (iterTimes == 2)
     return;
 else
     TrueDotsSet = findInitialDots(skleton, iterTimes + 1, rootinfo,...

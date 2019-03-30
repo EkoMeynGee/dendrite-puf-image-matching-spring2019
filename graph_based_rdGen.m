@@ -19,7 +19,7 @@ initial_image = mask.*initial_image;
 rootinfo.radius = radius;
 rootinfo.x = centerx;
 rootinfo.y = centery;
-TrueDotsSet = findInitialDots(image, 0, rootinfo, []);
+TrueDotsSet = findInitialDots(image, 1, rootinfo, []);
 
 %%Check initialDots existance and store
 
@@ -41,7 +41,7 @@ parent.level = 1;
 
 % The input is subnode for central node, parent and image,...
 % the output is overthrough node based on the input nodes.
-result = newNode_Search(points, initial_image, parent,[], [], 1);
+result = newNode_Search(points, initial_image, parent,[], [], 1, circleInfo);
 % hold all;
 % plot(result(:,2),result(:,1),'.','MarkerSize',20);
 %%% prepare desired graph

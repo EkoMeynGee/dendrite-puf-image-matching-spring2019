@@ -179,6 +179,9 @@ choice(4,:) = [1, 2, 4];
 
 for index = 1:8
     if (deg < (index-4)*45) && (deg >= (index-5)*45)
+        %         if deg < 0
+        %             ratio = (deg + (index-5)*45)/45;
+        %         else
         ratio = (deg - (index-5)*45)/45;
         if ratio > .5
             if (index == 8)
@@ -189,9 +192,9 @@ for index = 1:8
         else
             out = choice(index,:);
         end
-        break;
     end
 end
-    inputList(out) = 0;
+
+    
     matFrame = reshape(inputList, [3,3]);
 end
