@@ -14,10 +14,10 @@ po_mat = zeros(matchedNum, 4);
 figure, imshow(image_append)
 hold on
 for index = 1:matchedNum
-    eval(['temp1x = consistentMatchedTree1.' tree1Names{index} '.x']);
-    eval(['temp1y = consistentMatchedTree1.' tree1Names{index} '.y']);
-    eval(['temp2x = consistentMatchedTree2.' tree2Names{index} '.x + w1']);
-    eval(['temp2y = consistentMatchedTree2.' tree2Names{index} '.y']);
+    eval(['temp1x = consistentMatchedTree1.' tree1Names{index} '.x;']);
+    eval(['temp1y = consistentMatchedTree1.' tree1Names{index} '.y;']);
+    eval(['temp2x = consistentMatchedTree2.' tree2Names{index} '.x + w1;']);
+    eval(['temp2y = consistentMatchedTree2.' tree2Names{index} '.y;']);
     %eval(['tempTree2.' tree2Names{index} '.x = temp2x + w1']);
     line([temp1x, temp2x], [temp1y, temp2y], 'Color', 'green','LineStyle','--');
 end

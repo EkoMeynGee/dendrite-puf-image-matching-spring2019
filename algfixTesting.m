@@ -61,4 +61,4 @@ viscircles([[cell_ref{:,8}]',[cell_ref{:,9}]'],ones(size(cell_ref,1),1)*.5)
 
 matchedNodeDrawLine(testIMG, refIMG, consistentMatchedTree1, consistentMatchedTree2)
 
-
+matchingRate
