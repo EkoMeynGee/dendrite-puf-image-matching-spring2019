@@ -59,6 +59,9 @@ viscircles([[cell_ref{:,8}]',[cell_ref{:,9}]'],ones(size(cell_ref,1),1)*.5)
 [consistentMatchedTree1, matchingRate, consistentMatchedTree2] = mappingTest(tree_test,tree_ref,...
     .7,struct,struct,0,tree_test,tree_ref,0);
 
-matchedNodeDrawLine(testIMG, refIMG, consistentMatchedTree1, consistentMatchedTree2)
+po_mat = matchedNodeDrawLine(testIMG, refIMG, consistentMatchedTree1, consistentMatchedTree2);
 
+exactCorrectNum = mathcedPairsChecker(po_mat, 2);
+
+exactCorrectNum
 matchingRate
