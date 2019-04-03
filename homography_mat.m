@@ -16,7 +16,12 @@ n9_2 = [zeros(num,3), x1_set, y1_set, ones(num,1), (-x1_set .* y2_set),...
 
 solve_mat = [n9_1;n9_2];
 
-H_vec = svd(solve_mat);
-H_vec = reshape(H_vec,3,3);
-H_vec = H_vec';
-H_vec
+[~,~,V] = svd(solve_mat);
+H = V(:,end);
+H_mat = reshape(H,3,3);
+H_mat = H_mat';
+H_mat
+% H = linsolve(solve_mat,[x2_set(:);y2_set(:)]);
+% H_mat = reshape([H;1],3,3);
+% H_mat = H_mat';
+% H_mat

@@ -11,7 +11,7 @@ tree1Names = fieldnames(consistentMatchedTree1);
 tree2Names = fieldnames(consistentMatchedTree2);
 %tempTree2 = consistentMatchedTree2;
 po_mat = zeros(matchedNum, 4);
-figure, imshow(image_append)
+figure,imshow(image_append);
 hold on
 for index = 1:matchedNum
     eval(['temp1x = consistentMatchedTree1.' tree1Names{index} '.x;']);
@@ -23,5 +23,6 @@ for index = 1:matchedNum
     line([temp1x, temp2x], [temp1y, temp2y], 'Color', 'green','LineStyle','--');
 end
 
+hold off;
 
 
