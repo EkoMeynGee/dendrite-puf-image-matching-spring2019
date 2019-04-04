@@ -21,8 +21,10 @@ for index = 1:size(po_mat,1)
     tempB = [po_mat(index,3); po_mat(index,4); 1];
     tempB_trans = H_transform_mat_1 * tempB;
     tempA_trans = H_transform_mat_2 * tempA;
-    L1_dist = sum(abs(tempA(1:2) - tempB_trans(1:2) .* (1/tempB_trans(3))));
-    L2_dist = sum(abs(tempB(1:2) - tempA_trans(1:2) .* (1/tempA_trans(3))));
+    tempA_trans = tempA_trans(1:2)/tempA_trans(3);
+    tempB_trans = tempB_trans(1:2)/tempB_trans(3);
+    L1_dist = norm(tempA_trans - po_mat(index,[1,2]));
+    L2_dist = norm(tempB_trans - po_mat(index,[3 4]));
     if L1_dist < threshold
         count1 = count1 + 1;
     end
