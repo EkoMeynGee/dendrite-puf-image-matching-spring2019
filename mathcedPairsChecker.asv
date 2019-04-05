@@ -56,7 +56,7 @@ for index = 1:size(po_mat,1)
     end
 end
 
-[exactCorrectNum, I] = min([count1, count2]);
+[exactCorrectNum, I] = min(count1, count2);
 
 if I == 1
     success = success1;
@@ -70,9 +70,9 @@ image_append = [image1, image2];
 imshow(image_append)
 hold on
 for index = 1:exactCorrectNum
-    line([success(index,1), success(index,3)+w1], [success(index,2), success(index,4)])
+    line([success)
+    
 end
-hold off
 
 
 
