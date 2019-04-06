@@ -192,6 +192,6 @@ for index = 1:8
         break;
     end
 end
-inputList(out) = 0;
-matFrame = reshape(inputList, [3,3]);
+    inputList(out) = 0;
+    matFrame = reshape(inputList, [3,3]);
 end
