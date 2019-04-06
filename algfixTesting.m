@@ -56,8 +56,10 @@ viscircles([[cell_test{:,8}]', [cell_test{:,9}]'],ones(size(cell_test,1),1)*.5)
 figure, imshow(refIMG);
 viscircles([[cell_ref{:,8}]',[cell_ref{:,9}]'],ones(size(cell_ref,1),1)*.5)
 
+
+
 [consistentMatchedTree1, matchingRate, consistentMatchedTree2] = mappingTest(tree_test,tree_ref,...
-    .7,struct,struct,0,tree_test,tree_ref,0,.8);
+    .7,struct,struct,0,tree_test,tree_ref,0,.9);
 
 po_mat = matchedNodeDrawLine(testIMG, refIMG, consistentMatchedTree1, consistentMatchedTree2);
 
