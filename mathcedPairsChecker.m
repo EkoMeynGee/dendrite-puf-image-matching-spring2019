@@ -63,7 +63,7 @@ end
 [h1, w1] = size(image1);
 [h2, w2] = size(image2);
 image_append = [image1, image2];
-imshow(image_append)
+figure, imshow(image_append)
 hold on
 for index = 1:exactCorrectNum
     line([success(index,1), success(index,3)+w1], [success(index,2), success(index,4)])
