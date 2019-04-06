@@ -52,7 +52,6 @@ for index = 1:size(po_mat,1)
     end
 end
 
-<<<<<<< HEAD
 [exactCorrectNum, I] = min([count1, count2]);
 
 if I == 1
@@ -71,9 +70,6 @@ for index = 1:exactCorrectNum
 end
 hold off
 
-=======
-exactCorrectNum = min(count1, count2);
->>>>>>> parent of db29e60... add draw line for exact correct matched
 
 
 function out = newNorm(diff_mat)
