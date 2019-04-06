@@ -1,4 +1,4 @@
-function [TreeStruct, new_result, cellnodes] = graph_based_rdGen(image, circleInfo)
+function [TreeStruct, new_result, cellnodes, distinfo, angleinfo] = graph_based_rdGen(image, circleInfo, varargin)
 %%This function is differ than the original graph_based function, it should
 %%be called when the image is just a skeleton, and can be easily get Tree
 %%structure
@@ -25,12 +25,12 @@ TrueDotsSet = findInitialDots(image, 1, rootinfo, []);
 
 % index = 1;
 for k =1 :size(TrueDotsSet,1)
-%     if (initial_image(TrueDotsSet(k,1), TrueDotsSet(k,1)) ~= 1)
-%         continue
-%     end        
+    %     if (initial_image(TrueDotsSet(k,1), TrueDotsSet(k,1)) ~= 1)
+    %         continue
+    %     end
     eval(['points.p' num2str(k) '.x = TrueDotsSet(k,2);']);
     eval(['points.p' num2str(k) '.y = TrueDotsSet(k,1);']);
-%     index = index + 1;
+    %     index = index + 1;
 end
 
 %   imshow(image)
@@ -52,7 +52,7 @@ for l =1 : size(result,1)
     % before), angle, type ,level, parentx, parenty, x, y, middle radius]
     % 11/19/18 modified angle to atan2 and make it as degree  Zaoyi
     new_result(l,:) = [result(l,1)-result(l,5) result(l,2)-result(l,6)...
-        rad2deg(atan2(((result(l,2)-result(1,6))),(result(l,1)-result(1,5))))...
+        rad2deg(atan2(((result(l,6)-result(1,2))),(result(l,1)-result(1,5))))...
         result(l,3) result(l,4) result(l,5) result(l,6) result(l,1) result(l,2) radius];
 end
 length_level = max(new_result(:,5)); % The highest depth
@@ -111,9 +111,13 @@ end
 
 cellnodes = linksibling(cellnodes, new_result);
 
-
-% Build TreeStructure %%%Modified Zaoyi
-TreeStruct = buildTreeStrcut(cellnodes, new_result, rootinfo);
-
-%%%
+if (isempty(varargin))
+    % Build TreeStructure %%%Modified Zaoyi
+    [TreeStruct, distinfo, angleinfo] = buildTreeStrcut(cellnodes, new_result, rootinfo);
+else
+    distinfo = varargin{1};
+    angleinfo = varargin{2};
+    TreeStruct = buildTreeStrcut(cellnodes, new_result, rootinfo, distinfo, angleinfo);
+    %%%
+end
 end

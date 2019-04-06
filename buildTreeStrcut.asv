@@ -1,4 +1,4 @@
-function [out, dist_scaled_info, angle_scaled_info] = buildTreeStrcut(input,matrix,rootinfo,varargin)
+function [out, dist_scaled_info, angle_scaled_info] = buildTreeStrcut(input,matrix,rootinfo,varagin)
 % Build a clear strcut of the tree
 [a, b] = size(matrix);
 
@@ -11,23 +11,15 @@ for index = 1:a
     end
 end
 
-if (nargin == 5)
-    angle_scaled_info = varargin{2};
-    dist_scaled_info = varargin{1};
-    dist_mean = dist_scaled_info(1);
-    dist_var = dist_scaled_info(2);
-    angle_mean = angle_scaled_info(1);
-    angle_var = angle_scaled_info(2);
-else
-    angle_vec = [input{:,3}];
-    dist_vec = sqrt(([input{:,1}]).^2 + ([input{:,2}]).^2);
-    angle_mean = mean(angle_vec);
-    dist_mean = mean(dist_vec);
-    angle_var = var(angle_vec);
-    dist_var = var(dist_vec);
-    dist_scaled_info = [dist_mean, dist_var];
-    angle_scaled_info = [angle_mean, angle_var];
-end
+if (varargin)
+angle_vec = input{:,3};
+dist_vec = sqrt((input{:,1})^2 + (input{:,2})^2);
+angle_mean = mean(angle_vec);
+dist_mean = mean(dist_vec);
+angle_var = var(angle_vec);
+dist_var = var(dist_vec);
+dist_scaled_info = [dist_mean, dist_var];
+angle_scaled_info = [angle_mean, angle_var];
 
 for index = 1:a
     eval(['n' num2str(index) '.index = input{index,12};' ]);
@@ -51,5 +43,5 @@ for index = 1:a
 end
 
 out = Tree;
-
+    
 
