@@ -1,5 +1,5 @@
 function [ConsistentMatchTree, matchingRate, ConsistentMatchTree2] = mappingTest(Tree1,Tree2,...
-    param,ConsistentMatchTree,ConsistentMatchTree2,iterTimes,FullTree1,FullTree2,matchingRate)
+    param,ConsistentMatchTree,ConsistentMatchTree2,iterTimes,FullTree1,FullTree2,matchingRate,factor)
 %%This function is made for testing mapping algrothim
 %%Tree1 always is the testing tree
 
@@ -11,7 +11,7 @@ InconsistentTree2 = struct;
 consisCriterion1 = (1/3)*(alfa + alfa^2 + beta + gamma);
 consisCriterion2 = (1/6)*(alfa + alfa^2 + beta + gamma);
 
-[LinkedTree1, LinkedTree2] = mappingAndLink(Tree1,Tree2,param,FullTree1,FullTree2);
+[LinkedTree1, LinkedTree2] = mappingAndLink(Tree1,Tree2,param,FullTree1,FullTree2,factor);
 
 testingNum = numel(fieldnames(LinkedTree1));
 dataNum = numel(fieldnames(LinkedTree2));
@@ -113,5 +113,5 @@ if (inconsisTestingNum == 0 ||inconsisDataNum == 0 || iterTimes == 5 || matching
 else
     [ConsistentMatchTree, matchingRate, ConsistentMatchTree2] = mappingTest(InconsistentTree1,...
         InconsistentTree2, param/2, ConsistentMatchTree,  ConsistentMatchTree2,...
-        iterTimes + 1, FullTree1, FullTree2, matchingRate);
+        iterTimes + 1, FullTree1, FullTree2, matchingRate,factor);
 end

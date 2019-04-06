@@ -1,4 +1,4 @@
-function exactCorrectNum = mathcedPairsChecker(po_mat, threshold)
+function exactCorrectNum = mathcedPairsChecker(po_mat, threshold, image1, image2)
 %%po_mat functin will do the check for every pairs of matchedNodes of two
 %%image dendrite graphs, the input po-mat cotains x1, y1, x2, y2 respectively
 
@@ -34,6 +34,8 @@ H_transform_mat_2 = homography_mat(po_selected(:,3), po_selected(:,4),...
 %%count2 is the num of correct matched node for reference nodes set
 count1 = 0;
 count2 = 0;
+success1 = [];
+success2 = [];
 for index = 1:size(po_mat,1)
     tempA = [po_mat(index,1); po_mat(index,2); 1];
     tempB = [po_mat(index,3); po_mat(index,4); 1];
@@ -45,10 +47,12 @@ for index = 1:size(po_mat,1)
     L2_dist = norm(tempB_trans - tempA([1,2]));
     if L1_dist < threshold
         count1 = count1 + 1;
+        success1 = [success1; po_mat(index,:)];
     end
     
     if L2_dist < threshold
         count2 = count2 + 1;
+        success2 = [success2; po_mat(index,:)];
     end
 end
 

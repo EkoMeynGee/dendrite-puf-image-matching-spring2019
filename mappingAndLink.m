@@ -1,5 +1,5 @@
 function [LinkedTree1, LinkedTree2] = mappingAndLink(Tree1, Tree2,...
-    param, FullTree1, FullTree2)
+    param, FullTree1, FullTree2, factor)
 %%First part according to tthe Distance Matrix to mapping and set up link
 %%relationship with both two Tree structure each node
 
@@ -22,7 +22,7 @@ Distancematrix = inf(largesize);
 for index = 1:numT1
     for index2 = 1:numT2
         eval(['Distancematrix(index,index2) = DistanceScore(Tree1.'...
-            testField{index} ', Tree2.' dataField{index2} ', Tree1, Tree2, param, FullTree1, FullTree2);']);
+            testField{index} ', Tree2.' dataField{index2} ', Tree1, Tree2, param, FullTree1, FullTree2, factor);']);
     end
 end
 
