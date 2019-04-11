@@ -50,7 +50,7 @@ for index = 1:testingNum
             eval(['CatTree1.' exMatchedFields{indextt}...
                 ' = ConsistentMatchTree.' exMatchedFields{indextt} ';']);
         end
-            
+        
         for indexdd = 1:exMatchedNum2
             eval(['CatTree2.' exMatchedFields2{indexdd}...
                 ' = ConsistentMatchTree2.' exMatchedFields2{indexdd} ';']);
@@ -108,7 +108,7 @@ matchingRateDiff = matchedNum/((ogDataNum + testDataNum)/2) - matchingRate;
 fprintf("the last matchingRate Difference is %d !\n", round((matchingRateDiff*100), 3, 'significant'));
 matchingRate = matchingRate + (0.9^iterTimes)*matchingRateDiff;
 
-if (inconsisTestingNum == 0 ||inconsisDataNum == 0 || iterTimes == 5 || matchingRateDiff < 0.05)
+if (inconsisTestingNum == 0 ||inconsisDataNum == 0 || iterTimes == 6)
     return;
 else
     [ConsistentMatchTree, matchingRate, ConsistentMatchTree2] = mappingTest(InconsistentTree1,...

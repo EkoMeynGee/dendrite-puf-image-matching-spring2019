@@ -11,7 +11,7 @@ for index = 1:numpoints
     eval(['tempY = points.p' num2str(index) '.y;']);
     
     %---------------------Debug code----------------------------
-    %     imshow(imageWoCircle)
+%         imshow(imageWoCircle)
     %      viscircles([tempX tempY], 0.3);
     %-----------------------------------------------------------
     
@@ -166,6 +166,9 @@ end
 
 function matFrame = initialRemoval(tempX, tempY, inputFrame, circleInfo)
 deg = rad2deg(atan2(circleInfo.y-tempY, tempX-circleInfo.x));
+if deg == 180
+    deg = -180;
+end
 inputList = inputFrame(:);
 choice = zeros(8,3);
 choice(5,:) = [1, 2, 3];

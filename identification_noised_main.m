@@ -12,9 +12,9 @@ if noiseName == "salt & pepper"
         
         denoise_image = denoiseHandle(NImg, noiseName);
         imshow(denoise_image)
-        %         fprintf("checking the noised image with noise %3f \n", 0.001*index);
-        %         [maxmatchingRate, matchedTreeindex] = identification_noised(denoise_image);
-        %         data(index + 1,1) = maxmatchingRate;
+        fprintf("checking the noised image with noise %3f \n", 0.001*index);
+        [maxmatchingRate, matchedTreeindex] = identification_noised(denoise_image);
+        data(index + 1,1) = maxmatchingRate;
         
     end
     
@@ -32,11 +32,11 @@ elseif noiseName == "gaussian"
         title(['image with gaussian noise with standard deviation ', num2str(0.001*index)]);
         %--------------------------------------------
         
-        %         denoise_image = denoiseHandle(NImg, noiseName);
-        %         fprintf("checking the noised image with noise %3f \n", 0.001*index);
-        %         [maxmatchingRate, matchedTreeindex] = identification_noised(denoise_image);
-        %         data(index + 1,1) = maxmatchingRate;
-        %
+        denoise_image = denoiseHandle(NImg, noiseName);
+        fprintf("checking the noised image with noise %3f \n", 0.001*index);
+        [maxmatchingRate, matchedTreeindex] = identification_noised(denoise_image);
+        data(index + 1,1) = maxmatchingRate;
+        
     end
     
     figure, plot(data)
@@ -54,9 +54,9 @@ elseif noiseName == "motion"
         %--------------------------------------------
         
         denoise_image = denoiseHandle(NImg, noiseName, LEN, THETA);
-        %         fprintf("checking the noised image with noise %d pixels shift and 20 degree \n",index);
-        %         [maxmatchingRate, matchedTreeindex] = identification_noised(denoise_image);
-        %         data(index - 1,1) = maxmatchingRate;
+        fprintf("checking the noised image with noise %d pixels shift and 20 degree \n",index);
+        [maxmatchingRate, matchedTreeindex] = identification_noised(denoise_image);
+        data(index - 1,1) = maxmatchingRate;
         
     end
     
@@ -104,12 +104,12 @@ end
 TreeStruct = graph_based_rdGen(inputIMGE, circleCenter);
 
 [maxmatchingRate, matchedTreeindex] = mappingMain(TreeStruct);
-% if (maxmatchingRate < 0.2)
-%     fprintf("The maxmachingRate is %d, which is too low. There is no PUF MATCHED!!", maxmatchingRate);
-% else
-%     fprintf("This testing PUF DENDRITE is matched to IMAGE b%d in reference!!! \n The mathcing Rate is %d!!!!!",...
-%         matchedTreeindex, maxmatchingRate);
-% end
+if (maxmatchingRate < 0.2)
+    fprintf("The maxmachingRate is %d, which is too low. There is no PUF MATCHED!!", maxmatchingRate);
+else
+    fprintf("This testing PUF DENDRITE is matched to IMAGE b%d in reference!!! \n The mathcing Rate is %d!!!!!",...
+        matchedTreeindex, maxmatchingRate);
+end
 end
 
 

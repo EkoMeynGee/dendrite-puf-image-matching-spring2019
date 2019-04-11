@@ -18,6 +18,7 @@ elseif varargin{1} == "motion"
     PSF = fspecial('motion', LEN, THETA);
     NSR = 0;
     denoise_image = deconvwnr(noised_image, PSF, NSR);
+    denoise_image = imbinarize(denoise_image);
 end
 
 end
