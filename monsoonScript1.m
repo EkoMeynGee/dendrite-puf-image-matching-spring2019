@@ -6,7 +6,7 @@ Rmat = zeros(50,50);
 for index = 1:50
     eval(['fileName = "b' num2str(index) '.tif";']);
     RmatTemp = identification(fileName);
-    Rmat(:,index) = RmatTemp;
+Rmat(:,index) = RmatTemp;
 end
 
 save impuf50x50compareResult.mat Rmat
