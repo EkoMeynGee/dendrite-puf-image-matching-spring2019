@@ -3,8 +3,8 @@
 %%computing way
 
 Rmat = zeros(50,1);
-fileName = "b1.tif";
+fileName = "b2.tif";
 RmatTemp = identification(fileName);
 Rmat(:) = RmatTemp;
 
-save impuf50x50compareResult1.mat Rmat
+save impuf50x50compareResult2.mat Rmat
