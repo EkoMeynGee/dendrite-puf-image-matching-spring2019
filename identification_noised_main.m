@@ -2,11 +2,11 @@ function identification_noised_main(fileName, noiseName)
 refIMG = imread(fileName);
 refIMG = im2double(refIMG);
 if noiseName == "salt & pepper"
-    noised_sample = 40;
+    noised_sample = 1;
     data = zeros(noised_sample + 1, 1);
     
     for index = 0:noised_sample
-        NImg = imageNoiseMaker(fileName,noiseName,0.001*index);
+        NImg = imageNoiseMaker(fileName,noiseName,0.01);
         %--------------------------------------------
         %                  imshow(NImg);
         img = [NImg,refIMG];

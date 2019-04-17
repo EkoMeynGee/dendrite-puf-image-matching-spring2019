@@ -1,4 +1,4 @@
-function [matchingRate, exactCorrectNum] = algfixTesting(testIMG, refIMG)
+function [matchingRate, exactCorrectNum, iter_mat] = algfixTesting(testIMG, refIMG)
 %%A function, trying to fix the porblem of matching not really good, with 2
 %%image matrix. Load 2 data.mat before run this function.
 
@@ -58,8 +58,8 @@ circleTest.radius = para_test(3);
 
 
 
-[consistentMatchedTree1, matchingRate, consistentMatchedTree2] = mappingTest(tree_test,tree_ref,...
-    .7,struct,struct,0,tree_test,tree_ref,0,1);
+[consistentMatchedTree1, matchingRate, consistentMatchedTree2, iter_mat] = mappingTest(tree_test,tree_ref,...
+    .7,struct,struct,0,tree_test,tree_ref,0,1,[]);
 
 po_mat = matchedNodeDrawLine(testIMG, refIMG, consistentMatchedTree1, consistentMatchedTree2);
 

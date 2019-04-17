@@ -1,5 +1,5 @@
-function [ConsistentMatchTree, matchingRate, ConsistentMatchTree2] = mappingTest(Tree1,Tree2,...
-    param,ConsistentMatchTree,ConsistentMatchTree2,iterTimes,FullTree1,FullTree2,matchingRate,factor)
+function [ConsistentMatchTree, matchingRate, ConsistentMatchTree2, iter_mat] = mappingTest(Tree1,Tree2,...
+    param,ConsistentMatchTree,ConsistentMatchTree2,iterTimes,FullTree1,FullTree2,matchingRate,factor,iter_mat)
 %%This function is made for testing mapping algrothim
 %%Tree1 always is the testing tree
 
@@ -108,11 +108,12 @@ matchingRateDiff = matchedNum/(testDataNum) - matchingRate;
 % matchingRateDiff = matchedNum/((ogDataNum + testDataNum)/2) - matchingRate;
 fprintf("the last matchingRate Difference is %d !\n", round((matchingRateDiff*100), 3, 'significant'));
 matchingRate = matchingRate + (0.9^iterTimes)*matchingRateDiff;
+iter_mat = [iter_mat, matchingRate];
 
 if (inconsisTestingNum == 0 ||inconsisDataNum == 0 || iterTimes == 6)
     return;
 else
-    [ConsistentMatchTree, matchingRate, ConsistentMatchTree2] = mappingTest(InconsistentTree1,...
+    [ConsistentMatchTree, matchingRate, ConsistentMatchTree2,iter_mat] = mappingTest(InconsistentTree1,...
         InconsistentTree2, param/2, ConsistentMatchTree,  ConsistentMatchTree2,...
-        iterTimes + 1, FullTree1, FullTree2, matchingRate,factor);
+        iterTimes + 1, FullTree1, FullTree2, matchingRate,factor,iter_mat);
 end
