@@ -1,6 +1,5 @@
 function identification_noised_main(fileName, noiseName)
 refIMG = imread(fileName);
-refIMG = im2double(refIMG);
 if noiseName == "salt & pepper"
     noised_sample = 40;
     data = zeros(noised_sample + 1, 1);
@@ -33,14 +32,12 @@ elseif noiseName == "gaussian"
         NImg = imageNoiseMaker(fileName,noiseName,0.001*index);
         %--------------------------------------------
 %         imshow(NImg);
-        img = [NImg,refIMG];
-        figure, imshow(img)
 %         title(['image with gaussian noise with standard deviation ', num2str(0.001*index)]);
         %--------------------------------------------
         
-        denoise_image = denoiseHandle(NImg);
+        denoise_image = denoiseHandle(NImg, noiseName);
         fprintf("checking the noised image with noise %3f \n", 0.001*index);
-        [maxmatchingRate, matchedTreeindex,~] = identification_noised(denoise_image, refIMG);
+        [maxmatchingRate, matchedTreeindex] = identification_noised(denoise_image);
         data(index + 1,1) = maxmatchingRate;
         
     end
@@ -76,7 +73,6 @@ function [maxmatchingRate, matchedTreeindex, exactCorrectNum] = identification_n
 %handle the denoise the image and identificate the most possible one in reference set;
 
 % inputIMGE = imread(fileName);
-matchedTreeindex = -1;
 inputIMGE = im2double(inputIMGE);
 refIMG = im2double(refIMG);
 if (size(inputIMGE,3) == 3)
@@ -129,7 +125,7 @@ refIMG = (refIMG*-1) + 1;
 %-----OPTION 2----------------------
 [maxmatchingRate, exactCorrectNum] = algfixTesting(inputIMGE, refIMG);
 end
-%-----END OPTION 2-------------------------
+%-----
 
 
 

@@ -104,7 +104,8 @@ matchedNum = numel(fieldnames(ConsistentMatchTree));
 ogDataNum = numel(fieldnames(FullTree2));
 testDataNum = numel(fieldnames(FullTree1));
 
-matchingRateDiff = matchedNum/((ogDataNum + testDataNum)/2) - matchingRate;
+matchingRateDiff = matchedNum/(testDataNum) - matchingRate;
+% matchingRateDiff = matchedNum/((ogDataNum + testDataNum)/2) - matchingRate;
 fprintf("the last matchingRate Difference is %d !\n", round((matchingRateDiff*100), 3, 'significant'));
 matchingRate = matchingRate + (0.9^iterTimes)*matchingRateDiff;
 

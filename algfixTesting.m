@@ -1,4 +1,4 @@
-function algfixTesting(testIMG, refIMG)
+function [matchingRate, exactCorrectNum] = algfixTesting(testIMG, refIMG)
 %%A function, trying to fix the porblem of matching not really good, with 2
 %%image matrix. Load 2 data.mat before run this function.
 
@@ -49,12 +49,12 @@ circleTest.y = para_test(2);
 circleTest.radius = para_test(3);
 
 [tree_test, ~, cell_test] = graph_based_rdGen(testIMG, circleTest);
-figure, imshow(testIMG);
-viscircles([[cell_test{:,8}]', [cell_test{:,9}]'],ones(size(cell_test,1),1)*.5)
+% figure, imshow(testIMG);
+% viscircles([[cell_test{:,8}]', [cell_test{:,9}]'],ones(size(cell_test,1),1)*.5)
 
 [tree_ref, ~, cell_ref] = graph_based_rdGen(refIMG, circleRef);
-figure, imshow(refIMG);
-viscircles([[cell_ref{:,8}]',[cell_ref{:,9}]'],ones(size(cell_ref,1),1)*.5)
+% figure, imshow(refIMG);
+% viscircles([[cell_ref{:,8}]',[cell_ref{:,9}]'],ones(size(cell_ref,1),1)*.5)
 
 
 
@@ -65,5 +65,3 @@ po_mat = matchedNodeDrawLine(testIMG, refIMG, consistentMatchedTree1, consistent
 
 exactCorrectNum = mathcedPairsChecker(po_mat, 12, testIMG, refIMG);
 
-exactCorrectNum
-matchingRate
