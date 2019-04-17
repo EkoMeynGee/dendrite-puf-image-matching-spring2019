@@ -5,8 +5,8 @@ if noiseName == "salt & pepper"
     noised_sample = 1;
     data = zeros(noised_sample + 1, 1);
     
-    for index = 0:noised_sample
-        NImg = imageNoiseMaker(fileName,noiseName,0.01);
+    for index = 1:noised_sample
+        NImg = imageNoiseMaker(fileName,noiseName,0.005);
         %--------------------------------------------
         %                  imshow(NImg);
         img = [NImg,refIMG];
@@ -17,7 +17,7 @@ if noiseName == "salt & pepper"
         denoise_image = denoiseHandle(NImg, noiseName);
 %         imshow(denoise_image)
         fprintf("checking the noised image with noise %3f \n", 0.001*index);
-        [maxmatchingRate, matchedTreeindex,~] = identification_noised(denoise_image, refIMG);
+        [maxmatchingRate, matchedTreeindex,~,iter_mat] = identification_noised(denoise_image, refIMG);
         data(index + 1,1) = maxmatchingRate;
         
     end
@@ -71,11 +71,12 @@ elseif noiseName == "motion"
 end
 end
 
-function [maxmatchingRate, matchedTreeindex, exactCorrectNum] = identification_noised(inputIMGE, refIMG)
+function [maxmatchingRate, matchedTreeindex, exactCorrectNum,iter_mat] = identification_noised(inputIMGE, refIMG)
 %PREPROCESS the initial image, the modeTYPE decide if the function need to
 %handle the denoise the image and identificate the most possible one in reference set;
 
 % inputIMGE = imread(fileName);
+iter_mat = [];
 matchedTreeindex = -1;
 inputIMGE = im2double(inputIMGE);
 refIMG = im2double(refIMG);
@@ -127,7 +128,7 @@ refIMG = (refIMG*-1) + 1;
 %----------------END OPTION 1-----------
 
 %-----OPTION 2----------------------
-[maxmatchingRate, exactCorrectNum] = algfixTesting(inputIMGE, refIMG);
+[maxmatchingRate, exactCorrectNum,iter_mat] = algfixTesting(inputIMGE, refIMG);
 end
 %-----END OPTION 2-------------------------
 
