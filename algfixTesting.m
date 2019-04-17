@@ -48,18 +48,18 @@ circleTest.x = para_test(1);
 circleTest.y = para_test(2);
 circleTest.radius = para_test(3);
 
-[tree_test, ~, cell_test, distinfo, angleinfo] = graph_based_rdGen(testIMG, circleTest);
+[tree_test, ~, cell_test] = graph_based_rdGen(testIMG, circleTest);
 figure, imshow(testIMG);
 viscircles([[cell_test{:,8}]', [cell_test{:,9}]'],ones(size(cell_test,1),1)*.5)
 
-[tree_ref, ~, cell_ref] = graph_based_rdGen(refIMG, circleRef, distinfo, angleinfo);
+[tree_ref, ~, cell_ref] = graph_based_rdGen(refIMG, circleRef);
 figure, imshow(refIMG);
 viscircles([[cell_ref{:,8}]',[cell_ref{:,9}]'],ones(size(cell_ref,1),1)*.5)
 
 
 
 [consistentMatchedTree1, matchingRate, consistentMatchedTree2] = mappingTest(tree_test,tree_ref,...
-    .7,struct,struct,0,tree_test,tree_ref,0,.9);
+    .7,struct,struct,0,tree_test,tree_ref,0,1);
 
 po_mat = matchedNodeDrawLine(testIMG, refIMG, consistentMatchedTree1, consistentMatchedTree2);
 

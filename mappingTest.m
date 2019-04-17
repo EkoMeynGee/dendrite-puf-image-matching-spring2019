@@ -108,7 +108,7 @@ matchingRateDiff = matchedNum/((ogDataNum + testDataNum)/2) - matchingRate;
 fprintf("the last matchingRate Difference is %d !\n", round((matchingRateDiff*100), 3, 'significant'));
 matchingRate = matchingRate + (0.9^iterTimes)*matchingRateDiff;
 
-if (inconsisTestingNum == 0 ||inconsisDataNum == 0 || iterTimes == 6 || matchingRateDiff < .4)
+if (inconsisTestingNum == 0 ||inconsisDataNum == 0 || iterTimes == 6)
     return;
 else
     [ConsistentMatchTree, matchingRate, ConsistentMatchTree2] = mappingTest(InconsistentTree1,...
