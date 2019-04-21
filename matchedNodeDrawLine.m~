@@ -4,10 +4,9 @@ function po_mat = matchedNodeDrawLine(image1, image2, consistentMatchedTree1, co
 
 [h1, w1] = size(image1);
 [h2, w2] = size(image2);
-image1 = (image1*-1 + 1);
-image2 = (image2*-1 + 1);
-image_append = [image1, image2];
-image_append = image_append(:,[201:600, 1001:1400]);
+image1 = (image1*-1 + 1)
+image_append = [image1*-1 + 1, image2*-1 + 1];
+image_append = image_append(:,[1:300,501:800]);
 matchedNum = numel(fieldnames(consistentMatchedTree1));
 tree1Names = fieldnames(consistentMatchedTree1);
 tree2Names = fieldnames(consistentMatchedTree2);
@@ -16,12 +15,12 @@ po_mat = zeros(matchedNum, 4);
 figure,imshow(image_append);
 hold on
 for index = 1:matchedNum
-    eval(['temp1x = consistentMatchedTree1.' tree1Names{index} '.x-200;']);
+    eval(['temp1x = consistentMatchedTree1.' tree1Names{index} '.x;']);
     eval(['temp1y = consistentMatchedTree1.' tree1Names{index} '.y;']);
-    eval(['temp2x = consistentMatchedTree2.' tree2Names{index} '.x + w1 - 600;']);
+    eval(['temp2x = consistentMatchedTree2.' tree2Names{index} '.x + w1 - 200;']);
     eval(['temp2y = consistentMatchedTree2.' tree2Names{index} '.y;']);
     %eval(['tempTree2.' tree2Names{index} '.x = temp2x + w1']);
-    po_mat(index,:) = [temp1x+200, temp1y, temp2x-w1+600, temp2y];
+    po_mat(index,:) = [temp1x, temp1y, temp2x-w1, temp2y];
     line([temp1x, temp2x], [temp1y, temp2y], 'Color', 'red','LineStyle','--');
 end
 
