@@ -2,21 +2,21 @@ function identification_noised_main(fileName, noiseName)
 refIMG = imread(fileName);
 refIMG = im2double(refIMG);
 if noiseName == "salt & pepper"
-    noised_sample = 1;
+    noised_sample = 10;
     data = zeros(noised_sample + 1, 1);
     
     for index = 1:noised_sample
-        NImg = imageNoiseMaker(fileName,noiseName,0.005);
+        NImg = imageNoiseMaker(fileName,noiseName,0.005*(index-1));
         %--------------------------------------------
         %                  imshow(NImg);
-        img = [NImg,refIMG];
-        figure, imshow(img)
-        title(['image with pepper & salt noise', num2str(0.001*index)]);
+%         img = [NImg,refIMG];
+%         figure, imshow(img)
+%         title(['image with pepper & salt noise', num2str(0.001*index)]);
         %--------------------------------------------
         
         denoise_image = denoiseHandle(NImg, noiseName);
 %         imshow(denoise_image)
-        fprintf("checking the noised image with noise %3f \n", 0.001*index);
+%         fprintf("checking the noised image with noise %3f \n", 0.001*index);
         [maxmatchingRate, matchedTreeindex,~,iter_mat] = identification_noised(denoise_image, refIMG);
         data(index + 1,1) = maxmatchingRate;
         

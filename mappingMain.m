@@ -8,8 +8,8 @@ end
 
 dataBase = load('artificial_TreeData.mat');
 dataBase = dataBase.artificial_TreeData;
-
-treeNum = numel(fieldnames(dataBase));
+treeNum = 30;
+% treeNum = numel(fieldnames(dataBase));
 
 %%Put the OG image to be rotated image
 % First test image has been rotated 180
