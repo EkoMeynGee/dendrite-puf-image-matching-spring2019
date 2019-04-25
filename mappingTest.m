@@ -110,7 +110,7 @@ fprintf("the last matchingRate Difference is %d !\n", round((matchingRateDiff*10
 matchingRate = matchingRate + (0.9^iterTimes)*matchingRateDiff;
 iter_mat = [iter_mat, matchingRate];
 
-if (inconsisTestingNum == 0 ||inconsisDataNum == 0 || iterTimes == 6)
+if (inconsisTestingNum == 0 ||inconsisDataNum == 0 || iterTimes == 6 || matchingRate < 0.1)
     return;
 else
     [ConsistentMatchTree, matchingRate, ConsistentMatchTree2,iter_mat] = mappingTest(InconsistentTree1,...

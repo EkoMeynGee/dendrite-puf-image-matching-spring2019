@@ -1,19 +1,18 @@
 function quickScripts(start,endplace)
 
 for index = start:endplace
-    eval(['edit monsoonScript' num2str(index) '.m']);
-    eval(['temp = fopen("monsoonScript' num2str(index) '.m", "wt");']);
+    eval(['edit noise2Sript' num2str(index) '.m']);
+    eval(['temp = fopen("noise2Sript' num2str(index) '.m", "wt");']);
     %%--Writing--
     
-    fprintf(temp, 'Rmat = zeros(50,1);\n');
+    fprintf(temp, 'parpool;\n');
     fprintf(temp, 'fileName = \"b');
     eval(['fprintf(temp, "' num2str(index) '");'])
     fprintf(temp, '.tif\"');
-    fprintf(temp, ';\nRmatTemp = identification(fileName);\nRmat(:) = RmatTemp;\nsave impuf50x50compareResult');
+    fprintf(temp, ';\nRmatTemp = noiseTestMain(fileName,2);\nsave noise2Result');
     eval(['fprintf(temp, "' num2str(index) '");'])
-    fprintf(temp, '.m Rmat');
-    
-    
+    fprintf(temp, '.mat RmatTemp');
+
     %---end writing
     fclose(temp);
 end

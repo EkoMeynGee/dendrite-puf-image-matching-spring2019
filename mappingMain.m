@@ -26,8 +26,8 @@ for index = 1:treeNum
         eval(['newTreeStruct = dataBase.Tree' num2str(index) ';']);
     end
     tic
-    [ConsistentMatchTree, matchingRate] = mappingTest(testingTree,newTreeStruct,0.7,struct,struct,0,...
-        testingTree,newTreeStruct,0,.9);
+    [ConsistentMatchTree, matchingRate,~] = mappingTest(testingTree,newTreeStruct,0.7,struct,struct,0,...
+        testingTree,newTreeStruct,0,.9,[]);
     toc
     RmatriX(index) = matchingRate;
 end
