@@ -1,9 +1,9 @@
 #!/bin/bash
 #SBATCH --job-name=readmat
-#SBATCH --output=/home/zc95/dendrite-puf-monsoon-results/out10.txt
-#SBATCH --error=/home/zc95/dendrite-puf-monsoon-results/error10.txt
+#SBATCH --output=/home/zc95/dendrite-puf-monsoon-results2/out10.txt
+#SBATCH --error=/home/zc95/dendrite-puf-monsoon-results2/error10.txt
 #SBATCH --time=24:00:00
-#SBATCH --workdir=/home/zc95/dendrite-puf-image-matching-first
+#SBATCH --workdir=/home/zc95/dendrite-puf-image-matching-first2
 #SBATCH --mem=60000
 #SBATCH -c6
 
