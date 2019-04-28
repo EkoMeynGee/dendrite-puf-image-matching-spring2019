@@ -6,7 +6,7 @@ if (type==1)
     data = zeros(noised_sample, 1);
     
     parfor index = 1:noised_sample
-        NImg = imageNoiseMaker(fileName,"salt & pepper",0.005*index + 0.045);
+        NImg = imageNoiseMaker(fileName,"salt & pepper",0.005*(index-1));
         denoise_image = denoiseHandle(NImg, "salt & pepper");
         matchedTreeindex = smallIdentification(denoise_image);
         data(index) = matchedTreeindex;

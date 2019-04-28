@@ -1,3 +1,3 @@
-fileName = "b1.tif";
+fileName = "b11.tif";
 RmatTemp = noiseTestMain(fileName,1);
-save noiseResult1.mat RmatTemp
+save noiseResult11.mat RmatTemp
