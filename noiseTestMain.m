@@ -8,8 +8,13 @@ if (type==1)
     parfor index = 1:noised_sample
         NImg = imageNoiseMaker(fileName,"salt & pepper",0.005*(index-1));
         denoise_image = denoiseHandle(NImg, "salt & pepper");
-        matchedTreeindex = smallIdentification(denoise_image);
+        try
+            matchedTreeindex = smallIdentification(denoise_image);
+        catch
+            matchedTreeindex = 0;
+        end
         data(index) = matchedTreeindex;
+        
     end
 elseif (type==2)
     noised_sample = 26;
@@ -18,7 +23,11 @@ elseif (type==2)
     parfor index = 1:noised_sample
         NImg = imageNoiseMaker(fileName,"gaussian",0.001*(index-1));
         denoise_image = denoiseHandle(NImg);
-        matchedTreeindex = smallIdentification(denoise_image);
+        try
+            matchedTreeindex = smallIdentification(denoise_image);
+        catch
+            matchedTreeindex = 0;
+        end
         data(index) = matchedTreeindex;
     end
     
