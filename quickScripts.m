@@ -1,14 +1,14 @@
 function quickScripts(start,endplace)
 
 for index = start:endplace
-    eval(['edit noiseSript' num2str(index) '.m']);
-    eval(['temp = fopen("noiseSript' num2str(index) '.m", "wt");']);
+    eval(['edit noise2Sript' num2str(index) '.m']);
+    eval(['temp = fopen("noise2Sript' num2str(index) '.m", "wt");']);
     %%--Writing--
     
     fprintf(temp, 'fileName = \"b');
     eval(['fprintf(temp, "' num2str(index) '");'])
     fprintf(temp, '.tif\"');
-    fprintf(temp, ';\nRmatTemp = noiseTestMain(fileName,2);\nsave noiseResult');
+    fprintf(temp, ';\nRmatTemp = noiseTestMain(fileName,2);\nsave noiseResult2');
     eval(['fprintf(temp, "' num2str(index) '");'])
     fprintf(temp, '.mat RmatTemp');
 
