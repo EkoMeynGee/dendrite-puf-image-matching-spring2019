@@ -12,7 +12,7 @@ if (type==1)
         data(index) = matchedTreeindex;
     end
 elseif (type==2)
-    noised_sample = 30;
+    noised_sample = 26;
     data = zeros(noised_sample, 1);
     
     parfor index = 1:noised_sample
