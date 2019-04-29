@@ -92,6 +92,13 @@ title(ax, 'BRISK Features point matches');
 legend(ax,'matched points 1','matched points 2');
 
 %% Tree structure based feature matching
-sk = colorextract('b1.png');
-figure, imshow(sk)
+RGB = imread('b1.png');
+I = rgb2gray(RGB);
+bw = imbinarize(I,0.35);
+[w,h] = size(bw);
+s = regionprops(bw,'centroid');
+s_length = length(s);
 
+out = bwareaopen(bw, 700);
+skleton = bwmorph(out,'skel',inf);
+imshow(skleton)
