@@ -76,4 +76,4 @@ skleton = bwmorph(skleton,'fill');
 skleton = bwmorph(skleton,'fill');
 % figure, imshow(skleton)
 skleton = logical(skleton | circlemask) - circlemask2;
-figure, imshow(skleton)
+% figure, imshow(skleton)

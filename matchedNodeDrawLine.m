@@ -25,7 +25,7 @@ if isempty(varargin)
         eval(['temp2y = consistentMatchedTree2.' tree2Names{index} '.y;']);
         %eval(['tempTree2.' tree2Names{index} '.x = temp2x + w1']);
         po_mat(index,:) = [temp1x+200, temp1y, temp2x-w1+600, temp2y];
-        line([temp1x, temp2x], [temp1y, temp2y], 'Color', 'g','LineStyle','--');
+        line([temp1x, temp2x], [temp1y, temp2y], 'Color', 'y','LineStyle','--');
     end
     
     hold off;
@@ -42,7 +42,7 @@ else
         eval(['temp2y = consistentMatchedTree2.' tree2Names{index} '.y;']);
         %eval(['tempTree2.' tree2Names{index} '.x = temp2x + w1']);
         po_mat(index,:) = [temp1x, temp1y, temp2x-w1, temp2y];
-        line([temp1x, temp2x], [temp1y, temp2y], 'Color', 'g','LineStyle','--');
+        line([temp1x, temp2x], [temp1y, temp2y], 'Color', 'y','LineStyle','--');
     end
     
     hold off;

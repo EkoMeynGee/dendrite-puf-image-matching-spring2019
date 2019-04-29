@@ -1,93 +1,97 @@
-% General method by using Feature point extraction
+%% file definition
+fn= 'b6.png';
+rt_fn = insertBefore(fn, '.', 'rotat');
+
+%% Harris
+
+I1 = rgb2gray(imread(fn));
+I2 = rgb2gray(imread(rt_fn));
+
+points1 = detectHarrisFeatures(I1);
+points2 = detectHarrisFeatures(I2);
+
+[f1,vpts1] = extractFeatures(I1,points1);
+[f2,vpts2] = extractFeatures(I2,points2);
+
+indexPairs = matchFeatures(f1,f2) ;
+matchedPoints1 = vpts1(indexPairs(:,1));
+matchedPoints2 = vpts2(indexPairs(:,2));
+
+figure; 
+ax = axes;
+showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
+title(ax, 'Harris Features point matches');
+legend(ax,'matched points 1','matched points 2');
+
+
+%% SURF
+
+I1 = rgb2gray(imread(fn));
+I2 = rgb2gray(imread(rt_fn));
+
+points1 = detectSURFFeatures(I1);
+points2 = detectSURFFeatures(I2);
+
+[f1,vpts1] = extractFeatures(I1,points1);
+[f2,vpts2] = extractFeatures(I2,points2);
+
+indexPairs = matchFeatures(f1,f2) ;
+matchedPoints1 = vpts1(indexPairs(:,1));
+matchedPoints2 = vpts2(indexPairs(:,2));
+
+figure; 
+ax = axes;
+showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
+title(ax, 'SURF Features point matches');
+legend(ax,'matched points 1','matched points 2');
 % 
-% %% Harris
-% I1 = rgb2gray(imread('b1.png'));
-% I2 = rgb2gray(imread('b1rotat.png'));
-% 
-% points1 = detectHarrisFeatures(I1);
-% points2 = detectHarrisFeatures(I2);
-% 
-% [f1,vpts1] = extractFeatures(I1,points1);
-% [f2,vpts2] = extractFeatures(I2,points2);
-% 
-% indexPairs = matchFeatures(f1,f2) ;
-% matchedPoints1 = vpts1(indexPairs(:,1));
-% matchedPoints2 = vpts2(indexPairs(:,2));
-% 
-% figure; 
-% ax = axes;
-% showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
-% title(ax, 'Harris Features point matches');
-% legend(ax,'matched points 1','matched points 2');
-% 
-% 
-% %% SURF
-% I1 = rgb2gray(imread('b1.png'));
-% I2 = rgb2gray(imread('b1rotat.png'));
-% 
-% points1 = detectSURFFeatures(I1);
-% points2 = detectSURFFeatures(I2);
-% 
-% [f1,vpts1] = extractFeatures(I1,points1);
-% [f2,vpts2] = extractFeatures(I2,points2);
-% 
-% indexPairs = matchFeatures(f1,f2) ;
-% matchedPoints1 = vpts1(indexPairs(:,1));
-% matchedPoints2 = vpts2(indexPairs(:,2));
-% 
-% figure; 
-% ax = axes;
-% showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
-% title(ax, 'SURF Features point matches');
-% legend(ax,'matched points 1','matched points 2');
-% 
-% 
-% %% BRISK
-% 
-% I1 = rgb2gray(imread('b1.png'));
-% I2 = rgb2gray(imread('b1rotat.png'));
-% 
-% points1 = detectBRISKFeatures(I1);
-% points2 = detectBRISKFeatures(I2);
-% 
-% [f1,vpts1] = extractFeatures(I1,points1);
-% [f2,vpts2] = extractFeatures(I2,points2);
-% 
-% indexPairs = matchFeatures(f1,f2) ;
-% matchedPoints1 = vpts1(indexPairs(:,1));
-% matchedPoints2 = vpts2(indexPairs(:,2));
-% 
-% figure; 
-% ax = axes;
-% showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
-% title(ax, 'BRISK Features point matches');
-% legend(ax,'matched points 1','matched points 2');
-% 
-% %% FAST
-% 
-% I1 = rgb2gray(imread('b1.png'));
-% I2 = rgb2gray(imread('b1rotat.png'));
-% 
-% points1 = detectFASTFeatures(I1);
-% points2 = detectFASTFeatures(I2);
-% 
-% [f1,vpts1] = extractFeatures(I1,points1);
-% [f2,vpts2] = extractFeatures(I2,points2);
-% 
-% indexPairs = matchFeatures(f1,f2) ;
-% matchedPoints1 = vpts1(indexPairs(:,1));
-% matchedPoints2 = vpts2(indexPairs(:,2));
-% 
-% figure; 
-% ax = axes;
-% showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
-% title(ax, 'BRISK Features point matches');
-% legend(ax,'matched points 1','matched points 2');
+
+%% BRISK
+
+I1 = rgb2gray(imread(fn));
+I2 = rgb2gray(imread(rt_fn));
+
+points1 = detectBRISKFeatures(I1);
+points2 = detectBRISKFeatures(I2);
+
+[f1,vpts1] = extractFeatures(I1,points1);
+[f2,vpts2] = extractFeatures(I2,points2);
+
+indexPairs = matchFeatures(f1,f2) ;
+matchedPoints1 = vpts1(indexPairs(:,1));
+matchedPoints2 = vpts2(indexPairs(:,2));
+
+figure; 
+ax = axes;
+showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
+title(ax, 'BRISK Features point matches');
+legend(ax,'matched points 1','matched points 2');
+
+%% FAST
+
+I1 = rgb2gray(imread(fn));
+I2 = rgb2gray(imread(rt_fn));
+
+points1 = detectFASTFeatures(I1);
+points2 = detectFASTFeatures(I2);
+
+[f1,vpts1] = extractFeatures(I1,points1);
+[f2,vpts2] = extractFeatures(I2,points2);
+
+indexPairs = matchFeatures(f1,f2) ;
+matchedPoints1 = vpts1(indexPairs(:,1));
+matchedPoints2 = vpts2(indexPairs(:,2));
+
+figure; 
+ax = axes;
+showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
+title(ax, 'BRISK Features point matches');
+legend(ax,'matched points 1','matched points 2');
 
 %% Tree structure based feature matching
-sk = load('sk_test.mat');
 
-sk = sk.sk;
+sk = colorextract(fn);
+
 sk_rt = imrotate(sk, 180);
 
 para_ref = round(mean(hough_circle(sk, .5, .1, 33, 37, 1),2));
@@ -112,23 +116,18 @@ circleTest.radius = para_test(3);
 [consistentMatchedTree1, matchingRate, consistentMatchedTree2, iter_mat] = mappingTest(tree_test,tree_ref,...
     .7,struct,struct,0,tree_test,tree_ref,0,1,[]);
 
-master_i = rgb2gray(imread('b1.png'));
-sub_i = rgb2gray(imread('b1rotat.png'));
+master_i = rgb2gray(imread(fn));
+sub_i = rgb2gray(imread(rt_fn));
 
 po_mat = matchedNodeDrawLine(sk_rt, sk, consistentMatchedTree1, consistentMatchedTree2, sub_i, master_i);
 
 hold on
-viscircles([[cell_test{:,8}]', [cell_test{:,9}]'],ones(size(cell_test,1),1)*1)
+% viscircles([[cell_test{:,8}]', [cell_test{:,9}]'],ones(size(cell_test,1),1)*1)
+plot([cell_test{:,8}], [cell_test{:,9}], 'LineStyle', 'none', 'Marker', 'o', 'Color', 'r', 'DisplayName', 'matched points 1');
 
-viscircles([[cell_ref{:,8}]' + size(sk,2),[cell_ref{:,9}]'],ones(size(cell_ref,1),1)*1)
+% viscircles([[cell_ref{:,8}]' + size(sk,2),[cell_ref{:,9}]'],ones(size(cell_ref,1),1)*1)
+plot([cell_ref{:,8}] + size(sk,2), [cell_ref{:,9}], 'LineStyle', 'none', 'Marker', '+', 'Color', 'g', 'DisplayName', 'matched points 2');
+title('Tree structure based feature matching');
 hold off
-
-
-
-
-
-
-
-
 
 

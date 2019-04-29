@@ -12,7 +12,7 @@ centerx = circleInfo.y;
 % ADD 1st mask
 initial_image = image;
 [xgrid, ygrid] = meshgrid(1:width, 1:height);
-mask = sqrt((xgrid-centery).^2 + (ygrid-centerx).^2) <= radius+1;
+mask = sqrt((xgrid-centery).^2 + (ygrid-centerx).^2) <= radius;
 mask = (mask-1)*(-1);
 initial_image = mask.*initial_image;
 
