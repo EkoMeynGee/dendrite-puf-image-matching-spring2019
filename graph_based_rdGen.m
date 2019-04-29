@@ -12,7 +12,7 @@ centerx = circleInfo.y;
 % ADD 1st mask
 initial_image = image;
 [xgrid, ygrid] = meshgrid(1:width, 1:height);
-mask = sqrt((xgrid-centery).^2 + (ygrid-centerx).^2) <= radius;
+mask = sqrt((xgrid-centery).^2 + (ygrid-centerx).^2) <= radius+1;
 mask = (mask-1)*(-1);
 initial_image = mask.*initial_image;
 
@@ -33,7 +33,7 @@ for k =1 :size(TrueDotsSet,1)
     %     index = index + 1;
 end
 
-%   imshow(image)
+% imshow(image)
 % viscircles([TrueDotsSet(:,2) TrueDotsSet(:,1)],ones(1,size(TrueDotsSet,1)) * 0.3);
 parent.x = rootinfo.x;
 parent.y = rootinfo.y;

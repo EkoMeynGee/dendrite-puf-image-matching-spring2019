@@ -1,4 +1,4 @@
-function exactCorrectNum = mathcedPairsChecker(po_mat, threshold, image1, image2)
+function exactCorrectNum = mathcedPairsChecker(po_mat, threshold, image1, image2, varargin)
 %%po_mat functin will do the check for every pairs of matchedNodes of two
 %%image dendrite graphs, the input po-mat cotains x1, y1, x2, y2 respectively
 
@@ -20,12 +20,12 @@ end
 
 po_selected = po_mat(I,:);
 
-%%the H1_mat, making the the test nodes transform to the reference node domain 
+%%the H1_mat, making the the test nodes transform to the reference node domain
 H_transform_mat_1 = homography_mat(po_selected(:,1), po_selected(:,2),...
     po_selected(:,3), po_selected(:,4));
 
 
-%%the H2_mat, making the the reference nodes transform to the test node image domain 
+%%the H2_mat, making the the reference nodes transform to the test node image domain
 H_transform_mat_2 = homography_mat(po_selected(:,3), po_selected(:,4),...
     po_selected(:,1), po_selected(:,2));
 
@@ -60,20 +60,32 @@ end
 
 if I == 1
     success = success1;
-else 
+else
     success = success2;
 end
 
 [h1, w1] = size(image1);
 [h2, w2] = size(image2);
-image_append = [image1*-1+1, image2*-1+1];
-image_append = image_append(:,[201:600, 1001:1400]);
-figure, imshow(image_append)
-hold on
-for index = 1:exactCorrectNum
-    line([success(index,1)-200, success(index,3)+w1-600], [success(index,2), success(index,4)])
+if isempty(varargin)
+    image_append = [image1*-1+1, image2*-1+1];
+    image_append = image_append(:,[201:600, 1001:1400]);
+    figure, imshow(image_append)
+    hold on
+    for index = 1:exactCorrectNum
+        line([success(index,1)-200, success(index,3)+w1-600], [success(index,2), success(index,4)])
+    end
+    hold off
+    
+else
+    image_append = [varargin{1}, varargin{2}];
+    figure, imshow(image_append)
+    hold on  
+    for index = 1:exactCorrectNum
+        line([success(index,1), success(index,3)+w1], [success(index,2), success(index,4)])
+    end
+    hold off
+    
 end
-hold off
 
 
 
