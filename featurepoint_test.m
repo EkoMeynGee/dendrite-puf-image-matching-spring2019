@@ -1,11 +1,4 @@
-%%General method by using Feature point extraction
-%%% Feature point method
-% 
-% I1 = imread('b1.png');
-% 
-% I1 = rgb2gray(I1);
-% 
-% I2 = rgb2gray(imread('b2.png'));
+General method by using Feature point extraction
 
 %% Harris
 I1 = rgb2gray(imread('b1.png'));
