@@ -17,8 +17,9 @@ indexPairs = matchFeatures(f1,f2) ;
 matchedPoints1 = vpts1(indexPairs(:,1));
 matchedPoints2 = vpts2(indexPairs(:,2));
 
-% figure; 
-ax = subplot(3,2,1);
+figure; 
+% ax = subplot(3,2,1);
+ax = axes;
 showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
 title(ax, 'Harris Features point matches');
 legend(ax,'matched points 1','matched points 2');
@@ -37,8 +38,9 @@ indexPairs = matchFeatures(f1,f2) ;
 matchedPoints1 = vpts1(indexPairs(:,1));
 matchedPoints2 = vpts2(indexPairs(:,2));
 
-% figure; 
-ax = subplot(3,2,2);
+figure; 
+% ax = subplot(3,2,2);
+ax = axes;
 showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
 title(ax, 'Min Eigen Features point matches');
 legend(ax,'matched points 1','matched points 2');
@@ -58,8 +60,9 @@ indexPairs = matchFeatures(f1,f2) ;
 matchedPoints1 = vpts1(indexPairs(:,1));
 matchedPoints2 = vpts2(indexPairs(:,2));
 
-% figure;
-ax = subplot(3,2,3); 
+figure;
+% ax = subplot(3,2,3); 
+ax = axes;
 showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
 title(ax, 'SURF Features point matches');
 legend(ax,'matched points 1','matched points 2');
@@ -80,8 +83,9 @@ indexPairs = matchFeatures(f1,f2) ;
 matchedPoints1 = vpts1(indexPairs(:,1));
 matchedPoints2 = vpts2(indexPairs(:,2));
 
-% figure;
-ax = subplot(3,2,4); 
+figure;
+% ax = subplot(3,2,4); 
+ax = axes;
 showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
 title(ax, 'BRISK Features point matches');
 legend(ax,'matched points 1','matched points 2');
@@ -101,8 +105,9 @@ indexPairs = matchFeatures(f1,f2) ;
 matchedPoints1 = vpts1(indexPairs(:,1));
 matchedPoints2 = vpts2(indexPairs(:,2));
 
-% figure; 
-ax = subplot(3,2,5);
+figure; 
+% ax = subplot(3,2,5);
+ax = axes;
 showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
 title(ax, 'FAST Features point matches');
 legend(ax,'matched points 1', 'matched points 2');
@@ -138,7 +143,8 @@ circleTest.radius = para_test(3);
 master_i = rgb2gray(imread(fn));
 sub_i = rgb2gray(imread(rt_fn));
 
-subplot(3,2,6);
+% subplot(3,2,6);
+figure
 po_mat = matchedNodeDrawLine(sk_rt, sk, consistentMatchedTree1, consistentMatchedTree2, sub_i, master_i);
 
 hold on
