@@ -17,12 +17,31 @@ indexPairs = matchFeatures(f1,f2) ;
 matchedPoints1 = vpts1(indexPairs(:,1));
 matchedPoints2 = vpts2(indexPairs(:,2));
 
-figure; 
-ax = axes;
+% figure; 
+ax = subplot(3,2,1);
 showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
 title(ax, 'Harris Features point matches');
 legend(ax,'matched points 1','matched points 2');
 
+%% Min Eigen
+I1 = rgb2gray(imread(fn));
+I2 = rgb2gray(imread(rt_fn));
+
+points1 = detectMinEigenFeatures(I1);
+points2 = detectMinEigenFeatures(I2);
+
+[f1,vpts1] = extractFeatures(I1,points1);
+[f2,vpts2] = extractFeatures(I2,points2);
+
+indexPairs = matchFeatures(f1,f2) ;
+matchedPoints1 = vpts1(indexPairs(:,1));
+matchedPoints2 = vpts2(indexPairs(:,2));
+
+% figure; 
+ax = subplot(3,2,2);
+showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
+title(ax, 'Min Eigen Features point matches');
+legend(ax,'matched points 1','matched points 2');
 
 %% SURF
 
@@ -39,8 +58,8 @@ indexPairs = matchFeatures(f1,f2) ;
 matchedPoints1 = vpts1(indexPairs(:,1));
 matchedPoints2 = vpts2(indexPairs(:,2));
 
-figure; 
-ax = axes;
+% figure;
+ax = subplot(3,2,3); 
 showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
 title(ax, 'SURF Features point matches');
 legend(ax,'matched points 1','matched points 2');
@@ -61,8 +80,8 @@ indexPairs = matchFeatures(f1,f2) ;
 matchedPoints1 = vpts1(indexPairs(:,1));
 matchedPoints2 = vpts2(indexPairs(:,2));
 
-figure; 
-ax = axes;
+% figure;
+ax = subplot(3,2,4); 
 showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
 title(ax, 'BRISK Features point matches');
 legend(ax,'matched points 1','matched points 2');
@@ -82,11 +101,11 @@ indexPairs = matchFeatures(f1,f2) ;
 matchedPoints1 = vpts1(indexPairs(:,1));
 matchedPoints2 = vpts2(indexPairs(:,2));
 
-figure; 
-ax = axes;
+% figure; 
+ax = subplot(3,2,5);
 showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
-title(ax, 'BRISK Features point matches');
-legend(ax,'matched points 1','matched points 2');
+title(ax, 'FAST Features point matches');
+legend(ax,'matched points 1', 'matched points 2');
 
 %% Tree structure based feature matching
 
@@ -119,15 +138,19 @@ circleTest.radius = para_test(3);
 master_i = rgb2gray(imread(fn));
 sub_i = rgb2gray(imread(rt_fn));
 
+subplot(3,2,6);
 po_mat = matchedNodeDrawLine(sk_rt, sk, consistentMatchedTree1, consistentMatchedTree2, sub_i, master_i);
 
 hold on
 % viscircles([[cell_test{:,8}]', [cell_test{:,9}]'],ones(size(cell_test,1),1)*1)
-plot([cell_test{:,8}], [cell_test{:,9}], 'LineStyle', 'none', 'Marker', 'o', 'Color', 'r', 'DisplayName', 'matched points 1');
+p1 = plot([cell_test{:,8}], [cell_test{:,9}], 'LineStyle', 'none', 'Marker', 'o', 'Color',...
+ 'r', 'DisplayName', 'matched points 1');
 
 % viscircles([[cell_ref{:,8}]' + size(sk,2),[cell_ref{:,9}]'],ones(size(cell_ref,1),1)*1)
-plot([cell_ref{:,8}] + size(sk,2), [cell_ref{:,9}], 'LineStyle', 'none', 'Marker', '+', 'Color', 'g', 'DisplayName', 'matched points 2');
-title('Tree structure based feature matching');
+p2 = plot([cell_ref{:,8}] + size(sk,2), [cell_ref{:,9}], 'LineStyle', 'none', 'Marker', '+',...
+ 'Color', 'g', 'DisplayName', 'matched points 2');
+title('Tree structure based Features matches');
+legend([p1,p2], {'matched points 1', 'matched pints 2'});
 hold off
 
 

@@ -16,7 +16,7 @@ if isempty(varargin)
     image_append = [image1, image2];
     image_append = image_append(:,[201:600, 1001:1400]);
     %tempTree2 = consistentMatchedTree2;
-    figure,imshow(image_append);
+    imshow(image_append);
     hold on
     for index = 1:matchedNum
         eval(['temp1x = consistentMatchedTree1.' tree1Names{index} '.x-200;']);
@@ -33,7 +33,7 @@ else
     sub_i = varargin{1};
     master_i = varargin{2};
     image_append = [sub_i, master_i];
-    figure, imshow(image_append);
+    imshow(image_append);
     hold on    
     for index = 1:matchedNum
         eval(['temp1x = consistentMatchedTree1.' tree1Names{index} '.x;']);
