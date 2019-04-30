@@ -32,20 +32,39 @@ if isempty(varargin)
 else
     sub_i = varargin{1};
     master_i = varargin{2};
-    image_append = [sub_i, master_i];
-    imshow(image_append);
-    hold on    
-    for index = 1:matchedNum
-        eval(['temp1x = consistentMatchedTree1.' tree1Names{index} '.x;']);
-        eval(['temp1y = consistentMatchedTree1.' tree1Names{index} '.y;']);
-        eval(['temp2x = consistentMatchedTree2.' tree2Names{index} '.x + w1;']);
-        eval(['temp2y = consistentMatchedTree2.' tree2Names{index} '.y;']);
-        %eval(['tempTree2.' tree2Names{index} '.x = temp2x + w1']);
-        po_mat(index,:) = [temp1x, temp1y, temp2x-w1, temp2y];
-        line([temp1x, temp2x], [temp1y, temp2y], 'Color', 'y','LineStyle','--');
+
+    try 
+        varargin{3};
+        image_append = master_i;
+        imshow(image_append);
+        hold on
+        for index = 1:matchedNum
+            eval(['temp1x = consistentMatchedTree1.' tree1Names{index} '.x;']);
+            eval(['temp1y = consistentMatchedTree1.' tree1Names{index} '.y;']);
+            eval(['temp2x = consistentMatchedTree2.' tree2Names{index} '.x;']);
+            eval(['temp2y = consistentMatchedTree2.' tree2Names{index} '.y;']);
+            %eval(['tempTree2.' tree2Names{index} '.x = temp2x + w1']);
+            po_mat(index,:) = [temp1x, temp1y, temp2x, temp2y];
+            line([temp1x, temp2x], [temp1y, temp2y], 'Color', 'y','LineStyle','--');
+        end
+
+        hold off;
+    catch   
+        image_append = [sub_i, master_i];
+        imshow(image_append);
+        hold on    
+        for index = 1:matchedNum
+            eval(['temp1x = consistentMatchedTree1.' tree1Names{index} '.x;']);
+            eval(['temp1y = consistentMatchedTree1.' tree1Names{index} '.y;']);
+            eval(['temp2x = consistentMatchedTree2.' tree2Names{index} '.x + w1;']);
+            eval(['temp2y = consistentMatchedTree2.' tree2Names{index} '.y;']);
+            %eval(['tempTree2.' tree2Names{index} '.x = temp2x + w1']);
+            po_mat(index,:) = [temp1x, temp1y, temp2x-w1, temp2y];
+            line([temp1x, temp2x], [temp1y, temp2y], 'Color', 'y','LineStyle','--');
+        end
+
+        hold off;
     end
-    
-    hold off;
     
 end
 
