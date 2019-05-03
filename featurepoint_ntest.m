@@ -7,6 +7,7 @@ rt_fn = fn;
 I1 = rgb2gray(imread(fn));
 I2 = rgb2gray(imread(rt_fn));
 
+
 points1 = detectHarrisFeatures(I1);
 points2 = detectHarrisFeatures(I2);
 

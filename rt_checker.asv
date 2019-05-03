@@ -1,0 +1,8 @@
+function rt_checker(matchednode1, matchednode2, org_po, varargin)
+
+if isempty(varargin)
+    diff = abs(matchednode1 - org_po);
+    diff2 = abs(org_po - matchednode2);
+    distance = diff - diff2;
+    mean(diff)
+
