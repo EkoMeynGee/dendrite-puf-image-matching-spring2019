@@ -19,9 +19,6 @@ matchedPoints2 = vpts2(indexPairs(:,2));
 
 figure;
 % ax = subplot(3,2,1);
-
-
-
 ax = axes;
 showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
 title(ax, 'Harris Features point matches');
