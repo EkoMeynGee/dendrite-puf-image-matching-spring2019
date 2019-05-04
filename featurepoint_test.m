@@ -1,12 +1,12 @@
-% %% file definition
-% fn= 'b6.png';
-% rt_fn = insertBefore(fn, '.', 'rotat');
-% 
+%% file definition
+fn= 'b6.png';
+rt_fn = insertBefore(fn, '.', 'rotat');
+
 % %% Harris
 % 
-% I1 = rgb2gray(imread(fn));
-% I2 = rgb2gray(imread(rt_fn));
-% middle_i = [size(I1,2)/2, size(I1,1)/2];
+I1 = rgb2gray(imread(fn));
+I2 = rgb2gray(imread(rt_fn));
+middle_i = [size(I1,2)/2, size(I1,1)/2];
 % 
 % points1 = detectHarrisFeatures(I1);
 % points2 = detectHarrisFeatures(I2);
@@ -157,7 +157,7 @@ circleTest.radius = para_test(3);
 % viscircles([[cell_ref{:,8}]',[cell_ref{:,9}]'],ones(size(cell_ref,1),1)*.5)
 
 [consistentMatchedTree1, matchingRate, consistentMatchedTree2, iter_mat] = mappingTest(tree_test,tree_ref,...
-    .7,struct,struct,0,tree_test,tree_ref,0,1,[]);
+    .5,struct,struct,0,tree_test,tree_ref,.4,.6,[]);
 
 master_i = rgb2gray(imread(fn));
 sub_i = rgb2gray(imread(rt_fn));
@@ -168,7 +168,7 @@ po_mat = matchedNodeDrawLine(sk_rt, sk, consistentMatchedTree1, consistentMatche
 
 num = size(po_mat,1)
 
-ratio = rt_checker(po_mat(:,[1 2]), po_mat(:,[3 4]), middle_i, 2)
+ratio = rt_checker(po_mat(:,[1 2]), po_mat(:,[3 4]), middle_i, 5)
 
 hold on
 % viscircles([[cell_test{:,8}]', [cell_test{:,9}]'],ones(size(cell_test,1),1)*1)

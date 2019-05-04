@@ -21,8 +21,14 @@ Distancematrix = inf(largesize);
 
 for index = 1:numT1
     for index2 = 1:numT2
-        eval(['Distancematrix(index,index2) = DistanceScore(Tree1.'...
-            testField{index} ', Tree2.' dataField{index2} ', Tree1, Tree2, param, FullTree1, FullTree2, factor);']);
+        n_step.A = 0;
+        n_step.B = 0;
+        info.A = 0;
+        info.B = 0;
+        t = .6;
+        eval(['Distancematrix(index,index2) = t*DistanceScore(Tree1.'...
+            testField{index} ', Tree2.' dataField{index2} ', Tree1, Tree2, param, FullTree1, FullTree2, factor, n_step, info) + (1-t)*abs(Tree1.'...
+            testField{index} '.distRoot - Tree2.' dataField{index2} '.distRoot);']);
     end
 end
 

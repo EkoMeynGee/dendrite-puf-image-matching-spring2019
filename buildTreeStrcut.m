@@ -52,7 +52,7 @@ for index = 1:a
     eval(['n' num2str(index) '.DistanceSelf2ParentY = input{index,2};']);   
     eval(['n' num2str(index) '.parentIndex = newcol{index,1};']);
     eval(['n' num2str(index) '.siblingIndex = input{index,13};']);
-    eval(['n' num2str(index) '.distRoot = sqrt((input{index,8} - rootinfo.x)^2 + (input{index,9} - rootinfo.y)^2);']);
+    eval(['n' num2str(index) '.distRoot = sqrt((input{index,8} - rootinfo.y)^2 + (input{index,9} - rootinfo.x)^2);']);
 end
 
 for index = 1:a
