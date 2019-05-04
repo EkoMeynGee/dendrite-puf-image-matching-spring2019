@@ -1,135 +1,135 @@
-%% file definition
-fn= 'b6.png';
-rt_fn = insertBefore(fn, '.', 'rotat');
-
-%% Harris
-
-I1 = rgb2gray(imread(fn));
-I2 = rgb2gray(imread(rt_fn));
-middle_i = [size(I1,2)/2, size(I1,1)/2];
-
-points1 = detectHarrisFeatures(I1);
-points2 = detectHarrisFeatures(I2);
-
-[f1,vpts1] = extractFeatures(I1,points1);
-[f2,vpts2] = extractFeatures(I2,points2);
-
-indexPairs = matchFeatures(f1,f2) ;
-matchedPoints1 = vpts1(indexPairs(:,1));
-matchedPoints2 = vpts2(indexPairs(:,2));
-num = size(matchedPoints1,1)
-figure;
-% ax = subplot(3,2,1);
-
-ratio = rt_checker(matchedPoints1.Location, matchedPoints2.Location, middle_i, 1)
-
-ax = axes;
-showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
-title(ax, 'Harris Features point matches');
-legend(ax,'matched points 1','matched points 2');
-
-%% Min Eigen
-I1 = rgb2gray(imread(fn));
-I2 = rgb2gray(imread(rt_fn));
-
-points1 = detectMinEigenFeatures(I1);
-points2 = detectMinEigenFeatures(I2);
-
-[f1,vpts1] = extractFeatures(I1,points1);
-[f2,vpts2] = extractFeatures(I2,points2);
-
-indexPairs = matchFeatures(f1,f2) ;
-matchedPoints1 = vpts1(indexPairs(:,1));
-matchedPoints2 = vpts2(indexPairs(:,2));
-num = size(matchedPoints1,1)
-
-ratio = rt_checker(matchedPoints1.Location, matchedPoints2.Location, middle_i, 1)
-
-figure; 
-% ax = subplot(3,2,2);
-ax = axes;
-showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
-title(ax, 'Min Eigen Features point matches');
-legend(ax,'matched points 1','matched points 2');
-
-%% SURF
-
-I1 = rgb2gray(imread(fn));
-I2 = rgb2gray(imread(rt_fn));
-
-points1 = detectSURFFeatures(I1);
-points2 = detectSURFFeatures(I2);
-
-[f1,vpts1] = extractFeatures(I1,points1);
-[f2,vpts2] = extractFeatures(I2,points2);
-
-indexPairs = matchFeatures(f1,f2) ;
-matchedPoints1 = vpts1(indexPairs(:,1));
-matchedPoints2 = vpts2(indexPairs(:,2));
-
-num = size(matchedPoints1,1)
-
-ratio = rt_checker(matchedPoints1.Location, matchedPoints2.Location, middle_i, 1)
-
-figure;
-% ax = subplot(3,2,3); 
-ax = axes;
-showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
-title(ax, 'SURF Features point matches');
-legend(ax,'matched points 1','matched points 2');
+% %% file definition
+% fn= 'b6.png';
+% rt_fn = insertBefore(fn, '.', 'rotat');
 % 
-
-%% BRISK
-
-I1 = rgb2gray(imread(fn));
-I2 = rgb2gray(imread(rt_fn));
-
-points1 = detectBRISKFeatures(I1);
-points2 = detectBRISKFeatures(I2);
-
-[f1,vpts1] = extractFeatures(I1,points1);
-[f2,vpts2] = extractFeatures(I2,points2);
-
-indexPairs = matchFeatures(f1,f2) ;
-matchedPoints1 = vpts1(indexPairs(:,1));
-matchedPoints2 = vpts2(indexPairs(:,2));
-
-num = size(matchedPoints1,1)
-
-ratio = rt_checker(matchedPoints1.Location, matchedPoints2.Location, middle_i, 1)
-
-figure;
-% ax = subplot(3,2,4); 
-ax = axes;
-showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
-title(ax, 'BRISK Features point matches');
-legend(ax,'matched points 1','matched points 2');
-
-%% FAST
-
-I1 = rgb2gray(imread(fn));
-I2 = rgb2gray(imread(rt_fn));
-
-points1 = detectFASTFeatures(I1);
-points2 = detectFASTFeatures(I2);
-
-[f1,vpts1] = extractFeatures(I1,points1);
-[f2,vpts2] = extractFeatures(I2,points2);
-
-indexPairs = matchFeatures(f1,f2) ;
-matchedPoints1 = vpts1(indexPairs(:,1));
-matchedPoints2 = vpts2(indexPairs(:,2));
-
-num = size(matchedPoints1,1)
-
-ratio = rt_checker(matchedPoints1.Location, matchedPoints2.Location, middle_i, 1)
-
-figure; 
-% ax = subplot(3,2,5);
-ax = axes;
-showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
-title(ax, 'FAST Features point matches');
-legend(ax,'matched points 1', 'matched points 2');
+% %% Harris
+% 
+% I1 = rgb2gray(imread(fn));
+% I2 = rgb2gray(imread(rt_fn));
+% middle_i = [size(I1,2)/2, size(I1,1)/2];
+% 
+% points1 = detectHarrisFeatures(I1);
+% points2 = detectHarrisFeatures(I2);
+% 
+% [f1,vpts1] = extractFeatures(I1,points1);
+% [f2,vpts2] = extractFeatures(I2,points2);
+% 
+% indexPairs = matchFeatures(f1,f2) ;
+% matchedPoints1 = vpts1(indexPairs(:,1));
+% matchedPoints2 = vpts2(indexPairs(:,2));
+% num = size(matchedPoints1,1)
+% figure;
+% % ax = subplot(3,2,1);
+% 
+% ratio = rt_checker(matchedPoints1.Location, matchedPoints2.Location, middle_i, 1)
+% 
+% ax = axes;
+% showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
+% title(ax, 'Harris Features point matches');
+% legend(ax,'matched points 1','matched points 2');
+% 
+% %% Min Eigen
+% I1 = rgb2gray(imread(fn));
+% I2 = rgb2gray(imread(rt_fn));
+% 
+% points1 = detectMinEigenFeatures(I1);
+% points2 = detectMinEigenFeatures(I2);
+% 
+% [f1,vpts1] = extractFeatures(I1,points1);
+% [f2,vpts2] = extractFeatures(I2,points2);
+% 
+% indexPairs = matchFeatures(f1,f2) ;
+% matchedPoints1 = vpts1(indexPairs(:,1));
+% matchedPoints2 = vpts2(indexPairs(:,2));
+% num = size(matchedPoints1,1)
+% 
+% ratio = rt_checker(matchedPoints1.Location, matchedPoints2.Location, middle_i, 1)
+% 
+% figure; 
+% % ax = subplot(3,2,2);
+% ax = axes;
+% showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
+% title(ax, 'Min Eigen Features point matches');
+% legend(ax,'matched points 1','matched points 2');
+% 
+% %% SURF
+% 
+% I1 = rgb2gray(imread(fn));
+% I2 = rgb2gray(imread(rt_fn));
+% 
+% points1 = detectSURFFeatures(I1);
+% points2 = detectSURFFeatures(I2);
+% 
+% [f1,vpts1] = extractFeatures(I1,points1);
+% [f2,vpts2] = extractFeatures(I2,points2);
+% 
+% indexPairs = matchFeatures(f1,f2) ;
+% matchedPoints1 = vpts1(indexPairs(:,1));
+% matchedPoints2 = vpts2(indexPairs(:,2));
+% 
+% num = size(matchedPoints1,1)
+% 
+% ratio = rt_checker(matchedPoints1.Location, matchedPoints2.Location, middle_i, 1)
+% 
+% figure;
+% % ax = subplot(3,2,3); 
+% ax = axes;
+% showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
+% title(ax, 'SURF Features point matches');
+% legend(ax,'matched points 1','matched points 2');
+% % 
+% 
+% %% BRISK
+% 
+% I1 = rgb2gray(imread(fn));
+% I2 = rgb2gray(imread(rt_fn));
+% 
+% points1 = detectBRISKFeatures(I1);
+% points2 = detectBRISKFeatures(I2);
+% 
+% [f1,vpts1] = extractFeatures(I1,points1);
+% [f2,vpts2] = extractFeatures(I2,points2);
+% 
+% indexPairs = matchFeatures(f1,f2) ;
+% matchedPoints1 = vpts1(indexPairs(:,1));
+% matchedPoints2 = vpts2(indexPairs(:,2));
+% 
+% num = size(matchedPoints1,1)
+% 
+% ratio = rt_checker(matchedPoints1.Location, matchedPoints2.Location, middle_i, 1)
+% 
+% figure;
+% % ax = subplot(3,2,4); 
+% ax = axes;
+% showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
+% title(ax, 'BRISK Features point matches');
+% legend(ax,'matched points 1','matched points 2');
+% 
+% %% FAST
+% 
+% I1 = rgb2gray(imread(fn));
+% I2 = rgb2gray(imread(rt_fn));
+% 
+% points1 = detectFASTFeatures(I1);
+% points2 = detectFASTFeatures(I2);
+% 
+% [f1,vpts1] = extractFeatures(I1,points1);
+% [f2,vpts2] = extractFeatures(I2,points2);
+% 
+% indexPairs = matchFeatures(f1,f2) ;
+% matchedPoints1 = vpts1(indexPairs(:,1));
+% matchedPoints2 = vpts2(indexPairs(:,2));
+% 
+% num = size(matchedPoints1,1)
+% 
+% ratio = rt_checker(matchedPoints1.Location, matchedPoints2.Location, middle_i, 1)
+% 
+% figure; 
+% % ax = subplot(3,2,5);
+% ax = axes;
+% showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
+% title(ax, 'FAST Features point matches');
+% legend(ax,'matched points 1', 'matched points 2');
 
 %% Tree structure based feature matching
 
