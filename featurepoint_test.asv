@@ -1,5 +1,5 @@
 %% file definition
-fn= 'b3.png';
+fn= 'b5.png';
 rt_fn = insertBefore(fn, '.', 'rotat');
 
 %% Harris
