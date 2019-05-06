@@ -1,0 +1,9 @@
+refIm = 'b6.png';
+imread()
+
+for index = 1:100
+    eval(['filename = "sk' num2str(index) '.png";']);
+    im = im2double(imread(filename));
+    
+    
+end
