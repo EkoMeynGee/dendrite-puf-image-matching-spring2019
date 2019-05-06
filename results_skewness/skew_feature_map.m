@@ -1,6 +1,6 @@
 numbersamples = 100;
 
-refIm = 'b3.png';
+refIm = 'b1.png';
 ref = colorextract(refIm);
 para_ref = round(mean(hough_circle(ref, .5, .1, 33, 37, 1),2));
 circleRef.x = para_ref(2);
@@ -13,7 +13,7 @@ rate = zeros(numbersamples,1);
 
 for index = 1:numbersamples
 
-    eval(['filename = "s3k' num2str(index) '.png";']);
+    eval(['filename = "s1k' num2str(index) '.png";']);
     filename = char(filename);
     try
         im_t = colorextract(filename);
