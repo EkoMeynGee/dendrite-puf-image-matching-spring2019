@@ -22,8 +22,8 @@ figure;
 % ax = subplot(3,2,1);
 ax = axes;
 showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'Parent', ax);
-title(ax, 'Harris Features point matches');
-legend(ax,'matched points 1','matched points 2');
+% title(ax, 'Harris Features point matches');
+% legend(ax,'matched points 1','matched points 2');
 
 %% Min Eigen
 I1 = rgb2gray(imread(fn));
@@ -43,8 +43,8 @@ figure;
 % ax = subplot(3,2,2);
 ax = axes;
 showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'Parent', ax);
-title(ax, 'Min Eigen Features point matches');
-legend(ax,'matched points 1','matched points 2');
+% title(ax, 'Min Eigen Features point matches');
+% legend(ax,'matched points 1','matched points 2');
 
 %% SURF
 
@@ -58,15 +58,15 @@ points2 = detectSURFFeatures(I2);
 [f2,vpts2] = extractFeatures(I2,points2);
 
 indexPairs = matchFeatures(f1,f2) ;
-matchedPoints1 = vpts1(indexPairs(:,1));
-matchedPoints2 = vpts2(indexPairs(:,2));
+% matchedPoints1 = vpts1(indexPairs(:,1));
+% matchedPoints2 = vpts2(indexPairs(:,2));
 
 figure;
 % ax = subplot(3,2,3); 
 ax = axes;
 showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'Parent', ax);
-title(ax, 'SURF Features point matches');
-legend(ax,'matched points 1','matched points 2');
+% title(ax, 'SURF Features point matches');
+% legend(ax,'matched points 1','matched points 2');
 % 
 
 %% BRISK
@@ -88,8 +88,8 @@ figure;
 % ax = subplot(3,2,4); 
 ax = axes;
 showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'Parent', ax);
-title(ax, 'BRISK Features point matches');
-legend(ax,'matched points 1','matched points 2');
+% title(ax, 'BRISK Features point matches');
+% legend(ax,'matched points 1','matched points 2');
 
 %% FAST
 
@@ -110,8 +110,8 @@ figure;
 % ax = subplot(3,2,5);
 ax = axes;
 showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'Parent', ax);
-title(ax, 'FAST Features point matches');
-legend(ax,'matched points 1', 'matched points 2');
+% title(ax, 'FAST Features point matches');
+% legend(ax,'matched points 1', 'matched points 2');
 
 %% Tree structure based feature matching
 
