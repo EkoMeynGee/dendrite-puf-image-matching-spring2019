@@ -59,7 +59,7 @@ circleTest.radius = para_test(3);
 
 
 [consistentMatchedTree1, matchingRate, consistentMatchedTree2, iter_mat] = mappingTest(tree_test,tree_ref,...
-    .5,struct,struct,0,tree_test,tree_ref,.4,.6,[]);
+    .5,struct,struct,0,tree_test,tree_ref,0,.6,[]);
 
 po_mat = matchedNodeDrawLine(testIMG, refIMG, consistentMatchedTree1, consistentMatchedTree2);
 

@@ -1,0 +1,20 @@
+\begin{thebibliography}{1}
+
+\bibitem{munkres2014topology}
+James Munkres.
+\newblock {\em Topology}.
+\newblock Pearson Education, 2014.
+
+\bibitem{image-basedPUF}
+Saloomeh Shariati et~al.
+\newblock {\em Image-based physical unclonable functions for
+  anti-counterfeiting.}
+\newblock PhD thesis, Catholic University of Louvain, Louvain-la-Neuve,
+  Belgium, 2013.
+
+\bibitem{tarjan1972depth}
+Robert Tarjan.
+\newblock Depth-first search and linear graph algorithms.
+\newblock {\em SIAM journal on computing}, 1(2):146--160, 1972.
+
+\end{thebibliography}
