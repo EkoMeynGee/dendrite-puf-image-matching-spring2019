@@ -57,7 +57,6 @@ circleTest.radius = para_test(3);
 % viscircles([[cell_ref{:,8}]',[cell_ref{:,9}]'],ones(size(cell_ref,1),1)*.5)
 
 
-
 [consistentMatchedTree1, matchingRate, consistentMatchedTree2, iter_mat] = mappingTest(tree_test,tree_ref,...
     .5,struct,struct,0,tree_test,tree_ref,0,.6,[]);
 
