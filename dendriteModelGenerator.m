@@ -1,7 +1,7 @@
 function [DendriteImage, circleCenter] = dendriteModelGenerator(numBranch)
 
 %%This part put a circle into the center of image
-image = zeros(800,800);
+image = zeros(925,772);
 [height, width] = size(image);
 circleCenter.x = width/2;
 circleCenter.y = height/2;
@@ -40,8 +40,8 @@ while(index ~= numBranch + 1)
 end
 
 %Debug
-imshow(image)
-viscircles(randInitalSet,ones(numBranch,1));
+% imshow(image)
+% viscircles(randInitalSet,ones(numBranch,1));
 
 
 InitalProbMatrix1 = [0 0 0.05 0.9 0.05 0 0 0];
@@ -97,11 +97,12 @@ end
 
 
 DendriteImage = subTreeGen(Points, image, circleCenter);
-
-
-DendriteImage = bwmorph(DendriteImage,'thin',inf);
-DendriteImage = bwmorph(DendriteImage,'fill');
-DendriteImage = bwmorph(DendriteImage,'thin',inf);
+DendriteImage = logical(DendriteImage);
+DendriteImage = bwskel(DendriteImage);
+% 
+% DendriteImage = bwmorph(DendriteImage,'thin',inf);
+% DendriteImage = bwmorph(DendriteImage,'fill');
+% DendriteImage = bwmorph(DendriteImage,'thin',inf);
 % imshow(DendriteImage);
 
 

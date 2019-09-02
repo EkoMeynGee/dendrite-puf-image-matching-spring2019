@@ -54,8 +54,6 @@ circleTest.radius = para_test(3);
     .5,struct,struct,0,tree_test,tree_ref,0,.6,[]);
 
 
-
-
 function true_correct = scratch_checker(matchp1, matchp2, offset)
     mse = abs(matchp1.Location - matchp2.Location);
     true_correct = sum(sum(mse,2) < offset);
