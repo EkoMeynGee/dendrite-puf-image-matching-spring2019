@@ -21,7 +21,7 @@ for index = 1:2
         pathTypeTemp = downPathType;
     end
     [xnext, ynext] = nextCoords(x, y, pathTypeTemp);
-    [xnext2, ynext2] = nextCoords(xnext, ynext, pathTypeTemp);
+    [xnext2, ynext2] = nextCoords(xnext, ynext, pathTypeTemp); 
     if ((ynext2 >= ruleA) || (ynext2 <= 0)|| (xnext2 >= ruleB) ||...
             (xnext2 <= 0) || (image(ynext2, xnext2) == 1))
         logicalOut = true;

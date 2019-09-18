@@ -1,11 +1,14 @@
 %% file definition
-fn = 'b5.png';
-rt_fn = fn;
+% fn = 'b5.png';
+% rt_fn = fn;
+
+fn = 'c1.png';
+rt_fn = 'c_other2.png';
 
 %% Harris
 
 I1 = rgb2gray(imread(fn));
-I2 = rgb2gray(imread(rt_fn));
+I2 = rgb2gray(imrotate(imread(rt_fn),180));
 
 
 points1 = detectHarrisFeatures(I1);
@@ -115,12 +118,12 @@ showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'Parent', ax);
 
 %% Tree structure based feature matching
 
-sk = colorextract(fn);
+sk = colorextract_artificial(fn);
 
-sk_rt = sk;
+sk_rt = colorextract_artificial(rt_fn);
 
-para_ref = round(mean(hough_circle(sk, .5, .1, 33, 37, 1),2));
-para_test = round(mean(hough_circle(sk_rt, .5, .1, 33, 37, 1),2));
+para_ref = round(mean(hough_circle(sk, .5, .1, 35, 35, 1),2));
+para_test = round(mean(hough_circle(sk_rt, .5, .1, 35, 35, 1),2));
 
 circleRef.x = para_ref(2);
 circleRef.y = para_ref(1);

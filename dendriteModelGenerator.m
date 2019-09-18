@@ -1,7 +1,7 @@
 function [DendriteImage, circleCenter] = dendriteModelGenerator(numBranch)
 
 %%This part put a circle into the center of image
-image = zeros(925,772);
+image = zeros(800,800);
 [height, width] = size(image);
 circleCenter.x = width/2;
 circleCenter.y = height/2;
@@ -25,12 +25,12 @@ numDots = numel(yCoordin);
 randIndexSet = [];
 randInitalSet = zeros(numBranch,2);
 index = 1;
-while(index ~= numBranch + 1)
+while(index ~= numBranch + 1) 
     randindexTemp = randi([1, numDots]);
     tempDot.x = xCoordin(randindexTemp);
     tempDot.y = yCoordin(randindexTemp);
     if (ismember(randindexTemp,randIndexSet) || checkClosePoints...
-            (tempDot, randInitalSet, 12))
+            (tempDot, randInitalSet, 15))
         continue;
     end
     randIndexSet = [randIndexSet randindexTemp];

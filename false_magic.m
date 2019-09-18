@@ -1,6 +1,5 @@
 function rgb_img = false_magic(in, circleinfo)
-% try convert the image from the binary to rgb, which is actually not
-% possible
+% try convert the image from the binary to rgb
 
 % in is the skeleton
 
@@ -16,7 +15,7 @@ in = im2uint8(in3);
 [height, width] = size(in);
 [xgrid, ygrid] = meshgrid(1:width, 1:height);
 circle = sqrt((circleinfo.y - ygrid).^2 + (circleinfo.x...
-    - xgrid).^2) <= circleinfo.radius+1;
+    - xgrid).^2) <= circleinfo.radius+2;
 
 circle2 = sqrt((circleinfo.y - ygrid).^2 + (circleinfo.x...
     - xgrid).^2) <= circleinfo.radius-6;

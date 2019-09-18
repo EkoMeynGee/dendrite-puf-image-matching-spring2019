@@ -1,6 +1,10 @@
 function skleton = colorextract(filename)
 
-RGB = imread(filename);
+if isstring(filename) || ischar(filename)
+    RGB = imread(filename);
+else
+    RGB = filename;
+end
 % imshow(RGB)
 
 %convert frame from RGB to YCBCR colorspace
@@ -14,18 +18,18 @@ pixel_labels = imsegkmeans(ab, 3, 'NumAttempts', 3);
 
 mask1 = pixel_labels==1;
 cluster1 = RGB .* uint8(mask1);
-%     figure, imshow(cluster1)
-%   title('Objects in Cluster 1');
+figure, imshow(cluster1)
+title('Objects in Cluster 1');
 
 mask2 = pixel_labels==2;
 cluster2 = RGB .* uint8(mask2);
-%     figure, imshow(cluster2)
-%  title('Objects in Cluster 2');
+figure, imshow(cluster2)
+title('Objects in Cluster 2');
 
 mask3 = pixel_labels==3;
 cluster3 = RGB .* uint8(mask3);
-%      figure, imshow(cluster3)
-%   title('Objects in Cluster 3');
+figure, imshow(cluster3)
+title('Objects in Cluster 3');
 
 a = max(max(cluster1));
 b = max(max(cluster2));
