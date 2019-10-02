@@ -19,8 +19,8 @@ for i = 1:50
         if i == j
             snr_table(i) = computeSNR(I1, I2, 'd');
         end
-        points1 = detectHarrisFeatures(I1);
-        points2 = detectHarrisFeatures(I2);
+        points1 = detectFASTFeatures(I1);
+        points2 = detectFASTFeatures(I2);
         
         [f1,vpts1] = extractFeatures(I1,points1);
         [f2,vpts2] = extractFeatures(I2,points2);
@@ -79,8 +79,5 @@ end
 %% extract the rate
 [maxval,i] = max(rateTable,[],2);
 correct_rate = maxval(i == [1:50]');
-a = find(i == [1:50]');
-b = diag(feature_all);
-c = diag(matched_all);
-meanextracted = mean(mean(feature_all));
-meancorrect = mean(c(a));
+
+find()

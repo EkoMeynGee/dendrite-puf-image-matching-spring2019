@@ -11,7 +11,7 @@ function relative_d = DistanceScore_Fast(index_tree1,index_tree2,tree_mat1,tree_
 %  6: node.siblingIndex];
 
 relative_dist = abs(tree_mat1(index_tree1, 2) - tree_mat2(index_tree2, 2));
-relative_angle = abs(tree_mat1(index_tree1, 3) - tree_mat1(index_tree1, 3));
+relative_angle = abs(tree_mat1(index_tree1, 3) - tree_mat2(index_tree2, 3));
 relative_d = norm([sqrt(factor)*relative_dist, sqrt(1-factor)*relative_angle]);
 index_p1 = tree_mat1(index_tree1,5);
 index_p2 = tree_mat2(index_tree2,5);
@@ -23,7 +23,7 @@ while(1)
         break;
     end
     sub_dist = abs(tree_mat1(index_p1, 2) - tree_mat2(index_p2, 2));
-    sub_angle = abs(tree_mat1(index_p1, 3) - tree_mat1(index_p2, 3));
+    sub_angle = abs(tree_mat1(index_p1, 3) - tree_mat2(index_p2, 3));
     sub_d = norm([sqrt(factor)*sub_dist, sqrt(1-factor)*sub_angle]);
     index_p1 = tree_mat1(index_p1,5);
     index_p2 = tree_mat2(index_p2,5);
