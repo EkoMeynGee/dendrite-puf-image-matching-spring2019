@@ -49,13 +49,12 @@ lab_he = rgb2lab(RGB);
 % end
 
 lab_he = lab_he(:,:,2);
-
+lab_he = adpmedian(lab_he,3);
 % Image2= rgb2gray(lab_he);
 % figure, imshow(Image2)
-Image2 = imbinarize(lab_he,0.35);
+Image2 = imbinarize(lab_he, 12);
 % imshow(Image2)
-
-Image2 = bwareaopen(Image2, 35);
+Image2 = bwareaopen(Image2, 40);
 
 circle_info_set = round(mean(hough_circle(Image2, .5, .1, 35, 35, 1),2));
 circle.centers(1,1) = h/2;
@@ -72,10 +71,10 @@ Image2 = logical(Image2 + circlemask);
 %  figure, imshow(Image2)
 Image2 = Image2 - circlemask2;
 % figure, imshow(Image2)
+Image2 = imdilate(Image2, strel('disk',1));
 
-
-fill = bwmorph(Image2, 'fill');
-skleton = bwmorph(fill,'thin',inf);
+sk = bwmorph(Image2,'thin', 10);
+skleton = bwmorph(sk, 'fill');
 % figure, imshow(skleton)
 % skleton = bwmorph(skleton,'fill');
 % figure, imshow(skleton)

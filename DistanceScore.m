@@ -7,7 +7,7 @@ relative_dist = abs(node1.relativeLen - node2.relativeLen);
 relative_angle = abs(node1.angle - node2.angle);
 relative_d = norm([sqrt(factor)*relative_dist, sqrt(1-factor)*relative_angle]);
 
-if (isempty(node1.parentIndex )|| isempty(node2.parentIndex))
+if (isempty(node1.parentIndex)|| isempty(node2.parentIndex))
     out = relative_d;
     return;
 end

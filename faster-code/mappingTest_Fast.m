@@ -1,5 +1,5 @@
-function [ConsistentMatchTree, matchingRate, ConsistentMatchTree2, iter_mat] = mappingTest(Tree1,Tree2,...
-    param,ConsistentMatchTree,ConsistentMatchTree2,iterTimes,FullTree1,FullTree2,matchingRate,factor,iter_mat)
+function [ConsistentMatchTree, matchingRate, ConsistentMatchTree2, iter_mat] = mappingTest_Fast(Tree1,Tree2,...
+    param,ConsistentMatchTree,ConsistentMatchTree2,iterTimes,FullTree1,FullTree2,matchingRate,factor,iter_mat,dtmat_big)
 %%This function is made for testing mapping algrothim
 %%Tree1 always is the testing tree
 
@@ -11,8 +11,14 @@ InconsistentTree2 = struct;
 consisCriterion1 = (1/3)*(alfa + alfa^2 + beta + gamma);
 consisCriterion2 = (1/6)*(alfa + alfa^2 + beta + gamma);
 
-[LinkedTree1, LinkedTree2] = mappingAndLink(Tree1,Tree2,param,FullTree1,FullTree2,factor);
-
+if iterTimes == 0
+    [LinkedTree1, LinkedTree2, dtmat_big] = mappingAndLink_Faster(Tree1,Tree2,param,FullTree1,...
+        FullTree2,factor,iterTimes,[]);
+else
+    [LinkedTree1, LinkedTree2] = mappingAndLink_Faster(Tree1,Tree2,param,FullTree1,...
+        FullTree2,factor,iterTimes, dtmat_big);
+end
+    
 testingNum = numel(fieldnames(LinkedTree1));
 dataNum = numel(fieldnames(LinkedTree2));
 testingFields = fieldnames(LinkedTree1);
@@ -113,7 +119,7 @@ iter_mat = [iter_mat, matchingRate];
 if (inconsisTestingNum == 0 ||inconsisDataNum == 0 || iterTimes == 2 || matchingRate  > 0.90 || matchingRate == 1)
     return;
 else
-    [ConsistentMatchTree, matchingRate, ConsistentMatchTree2,iter_mat] = mappingTest(InconsistentTree1,...
+    [ConsistentMatchTree, matchingRate, ConsistentMatchTree2,iter_mat] = mappingTest_Fast(InconsistentTree1,...
         InconsistentTree2, 2*param/3, ConsistentMatchTree,  ConsistentMatchTree2,...
-        iterTimes + 1, FullTree1, FullTree2, matchingRate,factor,iter_mat);
+        iterTimes + 1, FullTree1, FullTree2, matchingRate,factor,iter_mat,dtmat_big);
 end

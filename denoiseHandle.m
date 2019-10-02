@@ -3,7 +3,7 @@ function denoise_image = denoiseHandle(noised_image, varargin)
 if isempty(varargin)
     denoise_image = wiener2(noised_image);
     denoise_image = imbinarize(denoise_image);
-    denoise_image = bwareaopen(denoise_image, 400);
+    denoise_image = bwareaopen(denoise_image);
 elseif varargin{1} == "salt & pepper"
     format = fspecial('average', 5);
     denoise_image = filter2(format, noised_image);
