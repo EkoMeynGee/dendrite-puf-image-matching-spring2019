@@ -15,7 +15,8 @@ for i = 1:50
     I1 = rgb2gray(imread(fn));
     for j = 1:50
         eval(['fn_rt = "c_other' num2str(j) '.png";']);
-        I2 = rgb2gray(imnoise(imread(fn_rt),'gaussian', 0, 0.02));
+        I2 = rgb2gray(imnoise(imread(fn_rt),'gaussian', 0, 0.01));
+%         I2 = imrotate(rgb2gray(imread(fn_rt)),180);
         if i == j
             snr_table(i) = computeSNR(I1, I2, 'd');
         end
@@ -33,7 +34,6 @@ for i = 1:50
 %         feature_all(j,i) = size(f1,1) + size(f2,1);
         feature_all(j,i) = f1.NumFeatures + f2.NumFeatures;
         rateTable(j,i) = (2 * matchedPoints1.Count) / feature_all(j,i);
-        feature_all(j,i) = f1.NumFeatures + f2.NumFeatures;
         
         
     end
@@ -42,10 +42,13 @@ end
 %% proposed method mapping
 
 rateTable = zeros(50,1);
+features = zeros(50,1);
+matcheds = zeros(50,1);
 for i = 1:50
     eval(['fn = "c' num2str(i) '.png";']);
-    
+%     eval(['fn_rt = "c_other' num2str(i) '.png";']);
     sk = colorextract_artificial(fn, 'n');
+    
     fn_rt = imnoise(imread(fn),'gaussian', 0, 0.01);
     sk_rt = colorextract_artificial(fn_rt, 'n');
     
@@ -71,7 +74,8 @@ for i = 1:50
     
 %     (2 * numel(fieldnames(consistentMatchedTree1))) / (size(cell_ref,1) + size(cell_test,1))
     rateTable(i) = (2 * numel(fieldnames(consistentMatchedTree1))) / (size(cell_ref,1) + size(cell_test,1));
-    
+    features(i) = size(cell_ref,1) + size(cell_test,1);
+    matcheds(i) = 2 * numel(fieldnames(consistentMatchedTree1));
 end
 
 
