@@ -1,14 +1,13 @@
-%% file definition
-% fn = 'b5.png';
-% rt_fn = fn;
+% file definition
+fn = './test-sample-og/b5.png';
+rt_fn = fn;
 
-fn = 'c1.png';
-rt_fn = 'c_other2.png';
-
+% fn = 'c1.png';
+% rt_fn = 'c_other2.png';
 %% Harris
 
 I1 = rgb2gray(imread(fn));
-I2 = rgb2gray(imrotate(imread(rt_fn),180));
+I2 = rgb2gray(imread(fn));
 
 
 points1 = detectHarrisFeatures(I1);
@@ -24,7 +23,7 @@ matchedPoints2 = vpts2(indexPairs(:,2));
 figure; 
 % ax = subplot(3,2,1);
 ax = axes;
-showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'Parent', ax);
+showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
 % title(ax, 'Harris Features point matches');
 % legend(ax,'matched points 1','matched points 2');
 
@@ -45,7 +44,7 @@ matchedPoints2 = vpts2(indexPairs(:,2));
 figure; 
 % ax = subplot(3,2,2);
 ax = axes;
-showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'Parent', ax);
+showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage', 'Parent', ax);
 % title(ax, 'Min Eigen Features point matches');
 % legend(ax,'matched points 1','matched points 2');
 
@@ -61,13 +60,13 @@ points2 = detectSURFFeatures(I2);
 [f2,vpts2] = extractFeatures(I2,points2);
 
 indexPairs = matchFeatures(f1,f2) ;
-% matchedPoints1 = vpts1(indexPairs(:,1));
-% matchedPoints2 = vpts2(indexPairs(:,2));
+matchedPoints1 = vpts1(indexPairs(:,1));
+matchedPoints2 = vpts2(indexPairs(:,2));
 
 figure;
 % ax = subplot(3,2,3); 
 ax = axes;
-showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'Parent', ax);
+showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2,'montage', 'Parent', ax);
 % title(ax, 'SURF Features point matches');
 % legend(ax,'matched points 1','matched points 2');
 % 
@@ -90,7 +89,7 @@ matchedPoints2 = vpts2(indexPairs(:,2));
 figure;
 % ax = subplot(3,2,4); 
 ax = axes;
-showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'Parent', ax);
+showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'montage','Parent', ax);
 % title(ax, 'BRISK Features point matches');
 % legend(ax,'matched points 1','matched points 2');
 
@@ -112,15 +111,15 @@ matchedPoints2 = vpts2(indexPairs(:,2));
 figure; 
 % ax = subplot(3,2,5);
 ax = axes;
-showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2, 'Parent', ax);
+showMatchedFeatures(I1,I2,matchedPoints1,matchedPoints2,'montage', 'Parent', ax);
 % title(ax, 'FAST Features point matches');
 % legend(ax,'matched points 1', 'matched points 2');
 
 %% Tree structure based feature matching
 
-sk = colorextract_artificial(fn);
+sk = colorextract_artificial(fn,'n');
 
-sk_rt = colorextract_artificial(rt_fn);
+sk_rt = colorextract_artificial(rt_fn,'n');
 
 para_ref = round(mean(hough_circle(sk, .5, .1, 35, 35, 1),2));
 para_test = round(mean(hough_circle(sk_rt, .5, .1, 35, 35, 1),2));
@@ -141,15 +140,15 @@ circleTest.radius = para_test(3);
 % figure, imshow(sk);
 % viscircles([[cell_ref{:,8}]',[cell_ref{:,9}]'],ones(size(cell_ref,1),1)*.5)
 
-[consistentMatchedTree1, matchingRate, consistentMatchedTree2, iter_mat] = mappingTest(tree_test,tree_ref,...
-    .7,struct,struct,0,tree_test,tree_ref,0,1,[]);
+[consistentMatchedTree1, matchingRate, consistentMatchedTree2, iter_mat] = mappingTest_Fast(tree_test,tree_ref,...
+    .7,struct,struct,0,tree_test,tree_ref,0,1,[],[]);
 
 master_i = rgb2gray(imread(fn));
 sub_i = rgb2gray(imread(rt_fn));
 
 % subplot(3,2,6);
 figure
-po_mat = matchedNodeDrawLine(sk_rt, sk, consistentMatchedTree1, consistentMatchedTree2, sub_i, master_i, 'overlap');
+po_mat = matchedNodeDrawLine(sk_rt, sk, consistentMatchedTree1, consistentMatchedTree2, sub_i, master_i);
 
 hold on
 % viscircles([[cell_test{:,8}]', [cell_test{:,9}]'],ones(size(cell_test,1),1)*1)
@@ -157,7 +156,7 @@ p1 = plot([cell_test{:,8}], [cell_test{:,9}], 'LineStyle', 'none', 'Marker', 'o'
  'r', 'DisplayName', 'matched points 1');
 
 % viscircles([[cell_ref{:,8}]' + size(sk,2),[cell_ref{:,9}]'],ones(size(cell_ref,1),1)*1)
-p2 = plot([cell_ref{:,8}], [cell_ref{:,9}], 'LineStyle', 'none', 'Marker', '+',...
+p2 = plot([cell_ref{:,8}] + size(sk,2) , [cell_ref{:,9}], 'LineStyle', 'none', 'Marker', '+',...
  'Color', 'g', 'DisplayName', 'matched points 2');
 title('Tree structure based Features matches');
 legend([p1,p2], {'matched points 1', 'matched pints 2'});

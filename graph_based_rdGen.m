@@ -57,8 +57,9 @@ for l =1 : size(result,1)
 end
 length_level = max(new_result(:,5)); % The highest depth
 new_result =[new_result,zeros(size(result,1),1)];
-
-
+% 
+% imshow(a)
+% viscircles([new_result(:,8) new_result(:,9)],ones(1,size(new_result,1)) * 0.5);
 
 % Make the node set to have an id, which is based on angle
 % Modified Zaoyi 11/25/2018

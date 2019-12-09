@@ -56,10 +56,14 @@ Image2 = imbinarize(lab_he, 12);
 % imshow(Image2)
 Image2 = bwareaopen(Image2, 40);
 
-circle_info_set = round(mean(hough_circle(Image2, .5, .1, 35, 35, 1),2));
-circle.centers(1,1) = h/2;
-circle.centers(1,2) = w/2;
-circle.radii = 36;
+% circle_info_set = round(mean(hough_circle(Image2, .5, .1, 35, 35, 1),2));
+% circle.centers(1,1) = w/2;
+% circle.centers(1,2) = h/2;
+% circle.radii = 36;
+circle_info_set = round(mean(hough_circle(im2bw(rgb2gray(RGB)), .5, .1, 30, 40, 1),2));
+circle.centers(1,1) = circle_info_set(2);
+circle.centers(1,2) = circle_info_set(1);
+circle.radii = circle_info_set(3);
 % hold on, Image2 = viscircles(circle.centers, circle.radii, 'Color', 'w');
 % Image2 = imfill(Image2, 'holes');
 [xgrid, ygrid] = meshgrid(1:size(Image2,2), 1:size(Image2,1));
@@ -73,7 +77,8 @@ Image2 = Image2 - circlemask2;
 % figure, imshow(Image2)
 Image2 = imdilate(Image2, strel('disk',1));
 
-sk = bwmorph(Image2,'thin', 10);
+sk = bwmorph(Image2,'thin', inf);
+% sk = bwmorph(Image2,'thin', 10);
 skleton = bwmorph(sk, 'fill');
 % figure, imshow(skleton)
 % skleton = bwmorph(skleton,'fill');

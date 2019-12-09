@@ -9,5 +9,4 @@
 
 module load matlab
 
-matlab -nodisplay -nodesktop -r "run monsoonScript4.m"
-srun date
+matlab -nodisplay -nodesktop -r "run test_run.m"

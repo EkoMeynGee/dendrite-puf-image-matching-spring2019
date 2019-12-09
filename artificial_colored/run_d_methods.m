@@ -10,13 +10,13 @@ rateTable = zeros(50,50);
 snr_table = zeros(50,1);
 feature_all = zeros(50,50);
 matched_all = zeros(50,50);
-for i = 1:50
-    eval(['fn = "c' num2str(i) '.png";']);
+for i = 43:43
+    eval(['fn = "1' num2str(i) '.tif";']);
     I1 = rgb2gray(imread(fn));
-    for j = 1:50
+    for j = 43:43
         eval(['fn_rt = "c_other' num2str(j) '.png";']);
-        I2 = rgb2gray(imnoise(imread(fn_rt),'gaussian', 0, 0.01));
-%         I2 = imrotate(rgb2gray(imread(fn_rt)),180);
+        I2 = rgb2gray(imnoise(imread(fn_rt),'gaussian', 0, 0.02));
+        %         I2 = imrotate(rgb2gray(imread(fn_rt)),180);
         if i == j
             snr_table(i) = computeSNR(I1, I2, 'd');
         end
@@ -31,7 +31,7 @@ for i = 1:50
         matchedPoints2 = vpts2(indexPairs(:,2));
         
         matched_all(j,i) = 2 * matchedPoints1.Count;
-%         feature_all(j,i) = size(f1,1) + size(f2,1);
+        %         feature_all(j,i) = size(f1,1) + size(f2,1);
         feature_all(j,i) = f1.NumFeatures + f2.NumFeatures;
         rateTable(j,i) = (2 * matchedPoints1.Count) / feature_all(j,i);
         
@@ -44,9 +44,9 @@ end
 rateTable = zeros(50,1);
 features = zeros(50,1);
 matcheds = zeros(50,1);
-for i = 1:50
-    eval(['fn = "c' num2str(i) '.png";']);
-%     eval(['fn_rt = "c_other' num2str(i) '.png";']);
+for i = 9:9
+    eval(['fn = "./test-sample-og/b' num2str(i) '.png";']);
+    %     eval(['fn_rt = "c_other' num2str(i) '.png";']);
     sk = colorextract_artificial(fn, 'n');
     
     fn_rt = imnoise(imread(fn),'gaussian', 0, 0.01);
@@ -60,7 +60,7 @@ for i = 1:50
     circleRef.radius = 35;
     
     circleTest.x = 400;
-    circleTest.y = 400;                                        
+    circleTest.y = 400;
     circleTest.radius = 35;
     
     [tree_test, ~, cell_test] = graph_based_rdGen(sk_rt, circleTest);
@@ -70,13 +70,68 @@ for i = 1:50
         .7,struct,struct,0,tree_test,tree_ref,0,1,[],[]);
     
     %[consistentMatchedTree1, matchingRate, consistentMatchedTree2, iter_mat] = mappingTest(tree_test,tree_ref,...
-      %  .7,struct,struct,0,tree_test,tree_ref,0,1,[]);
+    %  .7,struct,struct,0,tree_test,tree_ref,0,1,[]);
     
-%     (2 * numel(fieldnames(consistentMatchedTree1))) / (size(cell_ref,1) + size(cell_test,1))
+    %     (2 * numel(fieldnames(consistentMatchedTree1))) / (size(cell_ref,1) + size(cell_test,1))
     rateTable(i) = (2 * numel(fieldnames(consistentMatchedTree1))) / (size(cell_ref,1) + size(cell_test,1));
     features(i) = size(cell_ref,1) + size(cell_test,1);
     matcheds(i) = 2 * numel(fieldnames(consistentMatchedTree1));
 end
+
+
+
+%% loopy
+rateTable = zeros(50,1);
+fn = "c49.png";
+fn = imnoise(imread(fn),'gaussian', 0, 0.01);
+for i = 1:50
+    sk = colorextract_artificial(fn, 'n');
+    eval(['fn_rt = "c' num2str(i) '.png";']);
+    sk_rt = colorextract_artificial(fn_rt, 'n');
+    circleRef.x = 400;
+    circleRef.y = 400;
+    circleRef.radius = 35;
+    
+    circleTest.x = 400;
+    circleTest.y = 400;
+    circleTest.radius = 35;
+    
+    [tree_test, ~, cell_test] = graph_based_rdGen(sk_rt, circleTest);
+    [tree_ref, ~, cell_ref] = graph_based_rdGen(sk, circleRef);
+    
+    [consistentMatchedTree1, matchingRate, consistentMatchedTree2, iter_mat] = mappingTest_Fast(tree_test,tree_ref,...
+        .7,struct,struct,0,tree_test,tree_ref,0,1,[],[]);
+    rateTable(i) = (2 * numel(fieldnames(consistentMatchedTree1))) / (size(cell_ref,1) + size(cell_test,1));
+end
+
+
+
+%% similiarty iter()
+fn = "c49.png";
+fn_rt = imnoise(imread(fn),'gaussian', 0, 0.01);
+sk = colorextract_artificial(fn, 'n');
+sk_rt = colorextract_artificial(fn_rt, 'n');
+circleRef.x = 400;
+circleRef.y = 400;
+circleRef.radius = 35;
+
+circleTest.x = 400;
+circleTest.y = 400;
+circleTest.radius = 35;
+
+[tree_test, ~, cell_test] = graph_based_rdGen(sk_rt, circleTest);
+[tree_ref, ~, cell_ref] = graph_based_rdGen(sk, circleRef);
+
+[consistentMatchedTree1, matchingRate, consistentMatchedTree2, iter_mat] = mappingTest_Fast(tree_test,tree_ref,...
+    .7,struct,struct,0,tree_test,tree_ref,0,1,[],[]);
+
+%    rateTable(i) = (2 * numel(fieldnames(consistentMatchedTree1))) / (size(cell_ref,1) + size(cell_test,1));
+
+
+%% similarity vs snr
+
+
+
 
 
 
