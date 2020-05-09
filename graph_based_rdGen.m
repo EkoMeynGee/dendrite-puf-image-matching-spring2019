@@ -8,7 +8,6 @@ function [TreeStruct, new_result, cellnodes, distinfo, angleinfo] = graph_based_
 radius = circleInfo.radius;
 centery = circleInfo.x;
 centerx = circleInfo.y;
-
 % ADD 1st mask
 initial_image = image;
 [xgrid, ygrid] = meshgrid(1:width, 1:height);
@@ -58,7 +57,7 @@ end
 length_level = max(new_result(:,5)); % The highest depth
 new_result =[new_result,zeros(size(result,1),1)];
 % 
-% imshow(a)
+% figure, imshow(image)
 % viscircles([new_result(:,8) new_result(:,9)],ones(1,size(new_result,1)) * 0.5);
 
 % Make the node set to have an id, which is based on angle
