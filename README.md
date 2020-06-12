@@ -1,273 +1,91 @@
-# dendrite-puf-image-matching-spring2019
+## Dendrite graph penalized matching algorithm
 
-# Log__March-21-2019
+In this project, we want to design a light-weight graph matching image identification/ authentication algorithm. The code is developed by Ali and Zaoyi. In the following section, I will describe the usage of the most of function file and the folders. The most of functions do have the comments in the very beginning. I hope it could help anyone who wants to understand the code. :>
 
-## some results
+### The tutorial and the description of the current repository
 
-#####the bar plot with 10 test samples and the logs on the console
+ I will describe the usage of folders. Some folders are duplicated with minor changes, I may use them for different test before. I would suggest to include all files within the sub-folders in MATLAB before run any of codes. 
 
-```matlab
-%%the logs of 10 samples in the MATLAB console with runtime
+`./faster-code`: In this folder, I developed a newer version of graph penalized algorithm. In this version, the searching and matching algortihm is at least 10 times faster than the older version. The functions are named as `$Functions_Fast(er).m`, which means we also have the older version of the same function named as `$Functions.m`
 
->> identification('b1.tif','no')
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 16.385367 seconds.
-checking puf REF2...............
-the last matchingRate Difference is 2.560000e+01 !
-the last matchingRate Difference is 1.540000e+01 !
-the last matchingRate Difference is 4.620000e+00 !
-Elapsed time is 10.718910 seconds.
-checking puf REF3...............
-the last matchingRate Difference is 9.680000e+00 !
-the last matchingRate Difference is 4.610000e-01 !
-Elapsed time is 68.141852 seconds.
-checking puf REF4...............
-the last matchingRate Difference is 4.460000e+00 !
-Elapsed time is 52.066296 seconds.
-checking puf REF5...............
-the last matchingRate Difference is 1.330000e+01 !
-the last matchingRate Difference is 2.960000e+00 !
-Elapsed time is 38.150984 seconds.
-checking puf REF6...............
-the last matchingRate Difference is 2.170000e+00 !
-Elapsed time is 127.121698 seconds.
-checking puf REF7...............
-the last matchingRate Difference is 1.040000e+01 !
-the last matchingRate Difference is 7.790000e+00 !
-the last matchingRate Difference is 3.640000e+00 !
-Elapsed time is 25.962629 seconds.
-checking puf REF8...............
-the last matchingRate Difference is 1.160000e+01 !
-the last matchingRate Difference is 7.250000e-01 !
-Elapsed time is 55.490462 seconds.
-checking puf REF9...............
-the last matchingRate Difference is 1.090000e+01 !
-the last matchingRate Difference is 2.170000e+00 !
-Elapsed time is 44.574610 seconds.
-checking puf REF10...............
-the last matchingRate Difference is 1.090000e+01 !
-the last matchingRate Difference is 4.740000e-01 !
-Elapsed time is 70.303956 seconds.
-This testing PUF DENDRITE is matched to IMAGE b1 in reference!!! 
- The mathcing Rate is 1!!!!!>> 
-```
+`./faster-code/Distance_Fast.m`: This function computes the distance score between two nodes from `test` and `ref` separately. 
 
-![10samples]()
+`./faster-code/mappingAndLink_Faster.m`: The function map the linkage between two trees `test` and `ref`.
 
-#####the plot of image 1 with guassian noise(std. from 0 to 0.026)
+`./faster-code/mappingTest_Fast.m`: This function calls the previous two functions and can be used directly. The example of how to use it, you can see `./scratch_FinalTest.m`
 
-```matlab
-%% the log in console of increasing guassian noise
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 16.771237 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 16.656392 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 16.600367 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 16.799837 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 16.447043 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 16.497434 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 16.445121 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 16.828864 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 16.267051 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 16.629975 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 16.448633 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 16.559395 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 16.403256 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 16.692063 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 16.383412 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 16.599166 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 16.405961 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 16.646373 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 16.370741 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 17.105750 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 16.684589 seconds.
-Center1 at [400, 400], radius = 34
-checking puf REF1...............
-the last matchingRate Difference is 8.040000e+01 !
-the last matchingRate Difference is 1.180000e+01 !
-the last matchingRate Difference is 4.510000e+00 !
-Elapsed time is 25.642068 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 100 !
-Elapsed time is 17.717544 seconds.
-Center1 at [400, 400], radius = 34
-Center2 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 7.840000e+00 !
-the last matchingRate Difference is 6.860000e+00 !
-the last matchingRate Difference is 5 !
-the last matchingRate Difference is 3.530000e+00 !
-Elapsed time is 1056.143521 seconds.
-Center1 at [400, 400], radius = 35
-checking puf REF1...............
-the last matchingRate Difference is 1.180000e+01 !
-the last matchingRate Difference is 2.940000e+00 !
-Elapsed time is 574.998961 seconds.
-Center1 at [400, 400], radius = 34
-checking puf REF1...............
-the last matchingRate Difference is 1.760000e+01 !
-the last matchingRate Difference is 1.960000e+00 !
-Elapsed time is 819.106678 seconds.
-```
+`./artificial_colored:` The self-generated denderite image samples with color. All the functions inside this folder are used to do the test describe in the paper, e.g., SNR test and compressed image estimate test. You can use the samples in this folder.
 
-![](C:/Users/zc95/Dropbox/notes/dendrite-PUF-research-notes/Users/zaoyichi/Dropbox/dendrite-puf-2019Spring/results/pufRef1_mR-vs-gaussian%20noise.jpg)
+`./artificial_colored/step-by-step`: This folder is unnecessary, I create it for the image preprocessing step and only just for showing every step processed image.
 
-##### salt & pepper matching rate plot
+`./high-resolution:` Not required.
 
-![](C:/Users/zc95/Dropbox/notes/dendrite-PUF-research-notes/Users/zaoyichi/Dropbox/dendrite-puf-2019Spring/results/pufRef1_mR-vs-salt&pepper%20noise.jpg)
+`./pp-image`: Not required, for generating the thesis figure purpose.
 
+`./PUF_DATA_COLORFLIPED:` The function and the images that do flip the original white and black background.
 
+`./results`: The tested results figure sources and figures.
 
-##Problem
+`./results_skewness:` This folder does the test on the skew images (also included in this folder for different angles). You can see demo for file `skew_feature_map.m`
 
-1. ~~the output image is not the same scale as the original pixel image.~~
+`./results-mat/`: a very early version of 50 samples matching results in `.mat` file
 
-```matlab
-I = data.pic;
-imwrite(I, 'name.tif')
-```
+`./results-mat-2/`: the test results obtained by Monsoon for different noise level results.
 
+`./test-sample-og/`: original low resolution samples
 
+`./tex-reports/`: My latex report
 
-2. ~~cannot find the middle circle~~
+`./algfixTesting.m`: The function I used to debug, this function can visualze the matching by horizontal lines
 
-   1. Imfindcircles method ==-----NOT WORKING-------==
+`./build_Database.m`: Build a datebase to store all the trees
 
-      ```matlab
-      imfindcircles(I, [rangeA rangeB]);
-      ```
+`./buildTreeStruct.m`: Create the tree structure based on the extracted input information
 
-   2. Imfill method
+`./calc_homography.m`: The function used to compute the homography score between two points set
 
-   3. ```python
-      imfill(I, 'holes');
-      ```
+`./checkClosePoints.m`: The function that called by random dendrite generation to check if we are generating a loop.
 
-   4. Hough Transformation  ==———WORKS————==
+`./checkFutureOverlap.m`: Does the similar function as the previous one to check the overlap when generating the points.
 
-3. Not sure which distance is better
+`./colorextract_(artificial).m`: a start function that extract the skleton from the raw input image. **artificial* is for self-generated image.
 
-   1. the distance between the parents and that node
-   2. the distance between each node and the middle circle
+`./consistencyScore.m`: a part of the penalized algorithm that computes the consistency score between two nodes
 
-4. ~~the method findInitialDots has issue with rough image~~
+`./DendriteDicGen.m`: Create and save the image to a desgined `.mat` file
 
-5. ~~find some nodes have mutiple parents problem~~
+`./dendriteModelGenrator.m`: The main function of random denderite model generation, the input is wanted number of branch. The typical output is less than the number branch you input because of the initial start chance.
 
-   1. Really few condition, could be fixed by improving finding nodes method
-   2. picRef5 index3 (354, 394),has two parents index8 index9 (356, 390)
-   3. Finally, find the problem is that the ==Newpoints== structure does not initialize in the recursive loop.
+`./denoiseHandle.m`: the function that denoise the image based on different noise scenarios. such as guassian, salt & pepper and motion. 
 
-6. ~~add de-noise method~~
+`./DistanceScore.m`: compute the distance between two nodes
 
-   1. for now, just tried ==gaussian noise== and ==salt & pepper noise==
-   2. And just use really simple denoise method
+`./fasle_magic.m`: give the random generated dendrite sample a similar color scheme as the orginal sample
 
-7. ~~Fix the problem of initial circle is not accurate in ==graph_based_Rd function==~~
+`./featurepoint_(n)test.m`: One of the demo function that matching the feature points by different methods. Such as SIFT, Harris, etc. In the end, that would be our proposed method. *(n)* represents the noise test
 
+`./findInitialDots.m`: the sub-function that calll by `graph_based_rdGen.m` to find out the initial start points from the root.
 
+`./findmiddlecircle2.m`: A depreacted function that was designed to find out the location of the middle root, the current method uses `./hough_circle.m`
 
+`(general)_graph_based_rdGen.m`: the main feature extraction function of our proposed method as well as processing the data into a desired format.
 
+`./get_children.m` : find the children of a node when we do penalized matching
 
-# Work-Log_March-26-2019
+`./hungarian.m`: the underground source code to do quick matching in $O(n^3)$
 
-### Problems
+`linkchildren.m` and `linksibling.m` : The method that does the function to link the children and siblings for the matching algorithm
 
-- How to make two actually similar picture, one is the denoised image, which lost some node details; other one is the reference image. but they are looks really similar from a person visual point.
-- Add some scratches. Any method can denoise the scratches? does that change too much structure of tree.
-- how is similarity of scratch noise
-- ~~see if I can denoise the salt and pepper noise in a hard way, ==Not work==~~
-- Root finding accuracy checker, and how to solve it 
-- hough_circle function works better when the radius_descent set to **0.5**  
+`mappingMain.m` : The overall main function that maps two data storages.
 
+`matchedNodeDrawLine.m`: Draw line between the two images for matched feature points.
 
+`munkres.m`: older version of hugarian, deprecated.
 
+`scratch_FinalTest.m`: A demo to do scratch test
 
+`quickScripts_(sh).m`: A script to generate amount of sh code and source code for running Monsoon.
 
+`subTreeGen.m` : Called by `./dendriteModelGenrator.m` to generate the subtree.
+
+`randNode_Type.m` and `randPath_Choose.m` : Called by `./dendriteModelGenrator.m` to select the next node type and path direction. 
