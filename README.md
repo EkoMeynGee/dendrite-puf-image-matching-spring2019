@@ -1,6 +1,6 @@
 ## Dendrite graph penalized matching algorithm
 
-In this project, we want to design a light-weight graph matching image identification/ authentication algorithm. The code is developed by Ali and Zaoyi. In the following section, I will describe the usage of the most of function file and the folders. The most of functions do have the comments in the very beginning. I hope it could help anyone who wants to understand the code. :>
+In this project, we want to design a light-weight graph matching image identification/ authentication algorithm. The code is developed by Ali Valehi, Zaoyi Chi and Dr. Abolfazl razi. In the following section, I will describe the usage of the most of function file and the folders. The most of functions do have the comments in the very beginning. I hope it could help anyone who wants to understand the code. :>
 
 ### The tutorial and the description of the current repository
 
